@@ -22,6 +22,7 @@
 		2CD749A1196D4CAE00C73FB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD74980196D4CAE00C73FB1 /* UIKit.framework */; };
 		2CD749A9196D4CAE00C73FB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD749A7196D4CAE00C73FB1 /* InfoPlist.strings */; };
 		2CD749AB196D4CAE00C73FB1 /* CARCoverTableViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749AA196D4CAE00C73FB1 /* CARCoverTableViewDemoTests.m */; };
+		2CD749B7196D4CEC00C73FB1 /* CARCoverTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		2CD749A6196D4CAE00C73FB1 /* CARCoverTableViewDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CARCoverTableViewDemoTests-Info.plist"; sourceTree = "<group>"; };
 		2CD749A8196D4CAE00C73FB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CD749AA196D4CAE00C73FB1 /* CARCoverTableViewDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CARCoverTableViewDemoTests.m; sourceTree = "<group>"; };
+		2CD749B5196D4CEC00C73FB1 /* CARCoverTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverTableView.h; sourceTree = "<group>"; };
+		2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARCoverTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,7 @@
 				2CD74994196D4CAE00C73FB1 /* CARViewController.h */,
 				2CD74995196D4CAE00C73FB1 /* CARViewController.m */,
 				2CD74997196D4CAE00C73FB1 /* Images.xcassets */,
+				2CD749B4196D4CD700C73FB1 /* CARCoverTableView */,
 				2CD74983196D4CAE00C73FB1 /* Supporting Files */,
 			);
 			path = CARCoverTableViewDemo;
@@ -154,6 +158,15 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		2CD749B4196D4CD700C73FB1 /* CARCoverTableView */ = {
+			isa = PBXGroup;
+			children = (
+				2CD749B5196D4CEC00C73FB1 /* CARCoverTableView.h */,
+				2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */,
+			);
+			path = CARCoverTableView;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -256,6 +269,7 @@
 			files = (
 				2CD74996196D4CAE00C73FB1 /* CARViewController.m in Sources */,
 				2CD74989196D4CAE00C73FB1 /* main.m in Sources */,
+				2CD749B7196D4CEC00C73FB1 /* CARCoverTableView.m in Sources */,
 				2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
