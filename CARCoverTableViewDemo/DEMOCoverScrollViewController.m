@@ -43,7 +43,7 @@
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 	
-	cell.textLabel.text = [NSString stringWithFormat:@"CELL %02d-%03d", 0, indexPath.row];
+	cell.textLabel.text = [NSString stringWithFormat:@"CELL %02d-%03ld", 0, (long)indexPath.row];
 	return cell;
 }
 
@@ -60,7 +60,7 @@
 	
 	DEMOCoverScrollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
 	
-	cell.titleLabel.text = [NSString stringWithFormat:@"CELL %2d", indexPath.item];
+	cell.titleLabel.text = [NSString stringWithFormat:@"CELL %02ld", (long)indexPath.item];
 	
 	return cell;
 }

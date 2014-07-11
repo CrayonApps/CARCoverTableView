@@ -425,10 +425,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mitsuyoshi Yamazaki (EX372BK9A3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CARCoverTableViewDemo/CARCoverTableViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "CARCoverTableViewDemo/CARCoverTableViewDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3041FF5D-DD18-4C53-A350-0C66D4F7296D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -438,10 +440,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mitsuyoshi Yamazaki (EX372BK9A3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CARCoverTableViewDemo/CARCoverTableViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "CARCoverTableViewDemo/CARCoverTableViewDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3041FF5D-DD18-4C53-A350-0C66D4F7296D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

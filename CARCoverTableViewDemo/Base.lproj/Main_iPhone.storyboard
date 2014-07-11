@@ -9,19 +9,19 @@
             <objects>
                 <tableViewController id="2QA-13-aGn" customClass="DEMOImageViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="C3X-Uz-8Ie" customClass="CARCoverTableView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="6LK-5L-nF3">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="271"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image001.png" id="d4Y-C4-vvl">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="271"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" id="0fc-ki-bSf">
-                                    <rect key="frame" x="0.0" y="227" width="320" height="93"/>
+                                    <rect key="frame" x="0.0" y="178" width="320" height="93"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cannot use AutoLayout in UITableView.subviews" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rux-Or-AgC">
@@ -42,7 +42,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="cy7-zh-rBS" detailTextLabel="iU7-DS-ubj" style="IBUITableViewCellStyleSubtitle" id="kbr-Yl-Caz">
-                                <rect key="frame" x="0.0" y="342" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="293" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbr-Yl-Caz" id="g0C-gT-NoC">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -73,6 +73,7 @@
                             <outlet property="delegate" destination="2QA-13-aGn" id="jzC-AM-6di"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Nomal" id="fx0-DW-zEm"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ca0-ih-ZGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -103,7 +104,7 @@
             <objects>
                 <tableViewController id="5vC-DC-f4K" customClass="DEMOCoverScrollViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hoO-H5-zdm" customClass="CARCoverTableView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionView key="tableHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Alz-Bc-aXn">
@@ -182,6 +183,7 @@
                             <outlet property="delegate" destination="5vC-DC-f4K" id="saR-CD-tJG"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="CoverScroll" id="Mhu-zY-08i"/>
                     <connections>
                         <outlet property="coverScrollView" destination="Alz-Bc-aXn" id="sW3-ha-QGH"/>
