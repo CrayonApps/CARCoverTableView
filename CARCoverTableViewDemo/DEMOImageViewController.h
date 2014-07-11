@@ -1,5 +1,5 @@
 //
-//  CARViewController.h
+//  DEMOImageViewController.h
 //  CARCoverTableViewDemo
 //
 //  Created by Yamazaki Mitsuyoshi on 7/9/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CARViewController : UIViewController
+@interface DEMOImageViewController : UITableViewController
 
 @end

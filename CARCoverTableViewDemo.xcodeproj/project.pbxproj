@@ -15,7 +15,6 @@
 		2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7498C196D4CAE00C73FB1 /* CARAppDelegate.m */; };
 		2CD74990196D4CAE00C73FB1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7498E196D4CAE00C73FB1 /* Main_iPhone.storyboard */; };
 		2CD74993196D4CAE00C73FB1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CD74991196D4CAE00C73FB1 /* Main_iPad.storyboard */; };
-		2CD74996196D4CAE00C73FB1 /* CARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD74995196D4CAE00C73FB1 /* CARViewController.m */; };
 		2CD74998196D4CAE00C73FB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CD74997196D4CAE00C73FB1 /* Images.xcassets */; };
 		2CD7499F196D4CAE00C73FB1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7499E196D4CAE00C73FB1 /* XCTest.framework */; };
 		2CD749A0196D4CAE00C73FB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7497C196D4CAE00C73FB1 /* Foundation.framework */; };
@@ -23,6 +22,8 @@
 		2CD749A9196D4CAE00C73FB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD749A7196D4CAE00C73FB1 /* InfoPlist.strings */; };
 		2CD749AB196D4CAE00C73FB1 /* CARCoverTableViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749AA196D4CAE00C73FB1 /* CARCoverTableViewDemoTests.m */; };
 		2CD749B7196D4CEC00C73FB1 /* CARCoverTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */; };
+		2CD749BA196D4DD000C73FB1 /* DEMOImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749B9196D4DD000C73FB1 /* DEMOImageViewController.m */; };
+		2CD749BE196F904000C73FB1 /* image001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD749BD196F904000C73FB1 /* image001.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +49,6 @@
 		2CD7498C196D4CAE00C73FB1 /* CARAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CARAppDelegate.m; sourceTree = "<group>"; };
 		2CD7498F196D4CAE00C73FB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		2CD74992196D4CAE00C73FB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		2CD74994196D4CAE00C73FB1 /* CARViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CARViewController.h; sourceTree = "<group>"; };
-		2CD74995196D4CAE00C73FB1 /* CARViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CARViewController.m; sourceTree = "<group>"; };
 		2CD74997196D4CAE00C73FB1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2CD7499D196D4CAE00C73FB1 /* CARCoverTableViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CARCoverTableViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD7499E196D4CAE00C73FB1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -58,6 +57,9 @@
 		2CD749AA196D4CAE00C73FB1 /* CARCoverTableViewDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CARCoverTableViewDemoTests.m; sourceTree = "<group>"; };
 		2CD749B5196D4CEC00C73FB1 /* CARCoverTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverTableView.h; sourceTree = "<group>"; };
 		2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARCoverTableView.m; sourceTree = "<group>"; };
+		2CD749B8196D4DD000C73FB1 /* DEMOImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOImageViewController.h; sourceTree = "<group>"; };
+		2CD749B9196D4DD000C73FB1 /* DEMOImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOImageViewController.m; sourceTree = "<group>"; };
+		2CD749BD196F904000C73FB1 /* image001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image001.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +123,9 @@
 				2CD7498C196D4CAE00C73FB1 /* CARAppDelegate.m */,
 				2CD7498E196D4CAE00C73FB1 /* Main_iPhone.storyboard */,
 				2CD74991196D4CAE00C73FB1 /* Main_iPad.storyboard */,
-				2CD74994196D4CAE00C73FB1 /* CARViewController.h */,
-				2CD74995196D4CAE00C73FB1 /* CARViewController.m */,
+				2CD749B8196D4DD000C73FB1 /* DEMOImageViewController.h */,
+				2CD749B9196D4DD000C73FB1 /* DEMOImageViewController.m */,
+				2CD749BD196F904000C73FB1 /* image001.png */,
 				2CD74997196D4CAE00C73FB1 /* Images.xcassets */,
 				2CD749B4196D4CD700C73FB1 /* CARCoverTableView */,
 				2CD74983196D4CAE00C73FB1 /* Supporting Files */,
@@ -247,6 +250,7 @@
 			files = (
 				2CD74993196D4CAE00C73FB1 /* Main_iPad.storyboard in Resources */,
 				2CD74998196D4CAE00C73FB1 /* Images.xcassets in Resources */,
+				2CD749BE196F904000C73FB1 /* image001.png in Resources */,
 				2CD74990196D4CAE00C73FB1 /* Main_iPhone.storyboard in Resources */,
 				2CD74987196D4CAE00C73FB1 /* InfoPlist.strings in Resources */,
 			);
@@ -267,10 +271,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD74996196D4CAE00C73FB1 /* CARViewController.m in Sources */,
 				2CD74989196D4CAE00C73FB1 /* main.m in Sources */,
 				2CD749B7196D4CEC00C73FB1 /* CARCoverTableView.m in Sources */,
 				2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */,
+				2CD749BA196D4DD000C73FB1 /* DEMOImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

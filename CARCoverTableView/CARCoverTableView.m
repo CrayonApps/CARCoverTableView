@@ -141,21 +141,17 @@
 
 	if (y <= -self.contentInset.top) {
 
-		// reset
 		borderFrame.origin.y = -(self.borderHeight);
 				
-//		coverFrame.origin.y = -(self.imageHeight + self.borderHeight + diff);
 		coverFrame.size.height = self.coverHeight + self.borderHeight + diff;
 	}
 	else {
 		
 		borderFrame.origin.y = -(self.borderHeight);
-//		borderFrame.origin.y = y + self.imageHeight;
 		
 		if (y < -self.minimumCoverHeight) {
 			// 途中
 			coverFrame.size.height = self.coverHeight + self.borderHeight + diff;
-//			borderFrame.origin.y = y + self.imageHeight + diff;// + 20;
 		}
 		else {
 			// 上
