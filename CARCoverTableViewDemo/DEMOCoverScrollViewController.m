@@ -16,7 +16,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @end
 
-@interface DEMOCoverScrollViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CARCoverScrollViewDataSource>
+@interface DEMOCoverScrollViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CARCoverScrollViewDataSource, CARCoverScrollViewDelegate>
 
 @end
 
@@ -25,7 +25,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,6 +93,10 @@
 	view.titleLabel.text = [NSString stringWithFormat:@"VIEW %02d", index];
 	
 	return view;
+}
+
+- (void)scrollView:(CARCoverScrollView *)scrollView didSelectItemAtIndex:(NSInteger)index {
+	NSLog(@"%d view selected", index);
 }
 
 @end

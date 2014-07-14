@@ -8,6 +8,12 @@
 
 #import "CARCoverScrollView.h"
 
+/**
+ @brief view.gestureRecognizers から判別できるようにするためだけの空クラス
+ */
+@interface CARCoverScrollViewSelectionRecognizer : UITapGestureRecognizer
+@end
+
 @interface CARCoverScrollView ()
 
 @property (nonatomic, strong) NSMutableArray *reusableViews;
@@ -27,6 +33,9 @@
 
 - (void)getDatas;
 - (void)prepareViews;
+
+- (void)initializeView:(UIView *)view;
+- (void)viewDidSelect:(CARCoverScrollViewSelectionRecognizer *)gestureRecognizer;
 
 @end
 
@@ -57,6 +66,9 @@
 	self.reusableViews = [[NSMutableArray alloc] init];
 	self.allViews = [[NSMutableDictionary alloc] init];
 	self.defaultSubviews = self.subviews.copy;
+	
+	self.scrollsToTop = NO;
+	self.backgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark - Accessor
@@ -130,13 +142,7 @@
 - (void)enqueueAllViews {
 	
 	NSArray *views = [self.allViews allValues];
-	
-//	for (UIView *aView in views) {
-//		for (UIGestureRecognizer *recognizer in aView.gestureRecognizers) {
-//			[aView removeGestureRecognizer:recognizer];
-//		}
-//	}
-	
+		
 	[self.reusableViews addObjectsFromArray:views];
 	[self.allViews removeAllObjects];
 }
@@ -148,11 +154,7 @@
 	if (view == nil) {
 		return;
 	}
-	
-//	for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
-//		[view removeGestureRecognizer:recognizer];
-//	}
-	
+		
 	[view removeFromSuperview];
 	[self.allViews removeObjectForKey:@(index)];
 	[self.reusableViews addObject:view];
@@ -187,9 +189,7 @@
 	
 	[super layoutSubviews];
 	
-//	if (_itemSizes.count == _itemCount) {
-		[self prepareViews];
-//	}
+	[self prepareViews];
 }
 
 - (void)prepareViews {
@@ -228,16 +228,10 @@
 	[addViewIndices enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
 		
 		NSAssert([self.dataSource respondsToSelector:@selector(scrollView:viewAtIndex:)], @"");
+		
 		UIView *view = [self.dataSource scrollView:self viewAtIndex:idx];
-		
 		NSAssert(view, @"");
-		
-//		UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidSelect:)];
-//		gestureRecognizer.cancelsTouchesInView = NO;
-//		[view addGestureRecognizer:gestureRecognizer];
-		
-		view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		
+		[self initializeView:view];
 		
 		CGRect frame = self.frame;
 		frame.origin.y = 0.0f;
@@ -258,4 +252,40 @@
 	self.reloadingData = NO;
 }
 
+#pragma mark - View Initialization
+- (void)initializeView:(UIView *)view {
+	
+	BOOL hasSelectionRecognizer = NO;
+	
+	for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+		if ([recognizer isKindOfClass:[CARCoverScrollViewSelectionRecognizer class]]) {
+			hasSelectionRecognizer = YES;
+			break;
+		}
+	}
+	
+	if (hasSelectionRecognizer == NO) {
+		CARCoverScrollViewSelectionRecognizer *gestureRecognizer = [[CARCoverScrollViewSelectionRecognizer alloc] initWithTarget:self action:@selector(viewDidSelect:)];
+		gestureRecognizer.cancelsTouchesInView = NO;
+		[view addGestureRecognizer:gestureRecognizer];
+	}
+	
+	view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
+#pragma mark - View Selection
+- (void)viewDidSelect:(CARCoverScrollViewSelectionRecognizer *)gestureRecognizer {
+	
+	if ([self.delegate respondsToSelector:@selector(scrollView:didSelectItemAtIndex:)]) {
+		UIView *view = gestureRecognizer.view;
+		NSNumber *key = [_allViews allKeysForObject:view][0];
+		NSInteger index = key.integerValue;
+		
+		[self.delegate scrollView:self didSelectItemAtIndex:index];
+	}
+}
+
+@end
+
+@implementation CARCoverScrollViewSelectionRecognizer
 @end
