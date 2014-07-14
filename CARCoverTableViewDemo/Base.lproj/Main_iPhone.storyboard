@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="XyW-vg-8UT">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -84,15 +85,15 @@
         <scene sceneID="qqO-Fy-pWW">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="XyW-vg-8UT" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ZU4-FE-mWJ">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="2QA-13-aGn" kind="relationship" relationship="viewControllers" id="Wbi-G4-vVD"/>
                         <segue destination="5vC-DC-f4K" kind="relationship" relationship="viewControllers" id="MB7-g2-RXF"/>
+                        <segue destination="2QA-13-aGn" kind="relationship" relationship="viewControllers" id="Wbi-G4-vVD"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zC7-Bb-0dY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -107,44 +108,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionView key="tableHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Alz-Bc-aXn">
+                        <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Wjj-Ni-eSP" customClass="CARCoverScrollView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="evS-gU-wgu">
-                                <size key="itemSize" width="300" height="300"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <cells>
-                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="KRa-wz-Vk7" customClass="DEMOCoverScrollCell">
-                                    <rect key="frame" x="10" y="10" width="300" height="300"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CELL 001" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x08-gR-KR2">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <connections>
-                                        <outlet property="titleLabel" destination="x08-gR-KR2" id="Gu4-J5-iha"/>
-                                    </connections>
-                                </collectionViewCell>
-                            </cells>
                             <connections>
-                                <outlet property="dataSource" destination="5vC-DC-f4K" id="Olr-ug-cpV"/>
+                                <outlet property="dataSource" destination="5vC-DC-f4K" id="c29-ne-s39"/>
+                                <outlet property="delegate" destination="5vC-DC-f4K" id="88x-q2-OEg"/>
                             </connections>
-                        </collectionView>
+                        </scrollView>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Cyg-t5-Lag" userLabel="Dummy border view">
                             <rect key="frame" x="0.0" y="386" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -178,7 +149,7 @@
                         </prototypes>
                         <connections>
                             <outlet property="borderView" destination="Cyg-t5-Lag" id="6fw-kg-gqR"/>
-                            <outlet property="coverView" destination="Alz-Bc-aXn" id="2In-g9-ifM"/>
+                            <outlet property="coverView" destination="Wjj-Ni-eSP" id="wmB-z0-O3d"/>
                             <outlet property="dataSource" destination="5vC-DC-f4K" id="hAp-9U-QSz"/>
                             <outlet property="delegate" destination="5vC-DC-f4K" id="saR-CD-tJG"/>
                         </connections>
@@ -186,7 +157,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="CoverScroll" id="Mhu-zY-08i"/>
                     <connections>
-                        <outlet property="coverScrollView" destination="Alz-Bc-aXn" id="sW3-ha-QGH"/>
+                        <outlet property="coverScrollView" destination="Wjj-Ni-eSP" id="S4Q-GK-ojd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cy7-bC-pAd" userLabel="First Responder" sceneMemberID="firstResponder"/>

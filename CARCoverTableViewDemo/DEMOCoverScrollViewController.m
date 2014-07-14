@@ -12,7 +12,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @end
 
-@interface DEMOCoverScrollViewController () <UICollectionViewDataSource>
+@interface DEMOCoverScrollView : UIView
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@end
+
+@interface DEMOCoverScrollViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CARCoverScrollViewDataSource>
 
 @end
 
@@ -22,6 +26,11 @@
 {
     [super viewDidLoad];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,8 +74,52 @@
 	return cell;
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	return [(UICollectionViewFlowLayout *)collectionViewLayout itemSize];
+}
+
+#pragma mark - CARCoverScrollViewDataSource
+- (NSInteger)numberOfItemsInScrollView:(CARCoverScrollView *)scrollView {
+	return 10;
+}
+
+- (UIView *)scrollView:(CARCoverScrollView *)scrollView viewAtIndex:(NSInteger)index {
+	
+	DEMOCoverScrollView *view = [scrollView dequeReusableView];
+	if (view == nil) {
+		view = [[DEMOCoverScrollView alloc] init];
+	}
+	
+	view.titleLabel.text = [NSString stringWithFormat:@"VIEW %02d", index];
+	
+	return view;
+}
+
 @end
 
 @implementation DEMOCoverScrollCell
+
+@end
+
+@implementation DEMOCoverScrollView
+
+@synthesize titleLabel = _titleLabel;
+
+- (UILabel *)titleLabel {
+	
+	if (_titleLabel == nil) {
+		
+		_titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
+		_titleLabel.font = [UIFont boldSystemFontOfSize:30.0f];
+		_titleLabel.textAlignment = NSTextAlignmentCenter;
+		_titleLabel.backgroundColor = [UIColor redColor];
+		_titleLabel.textColor = [UIColor whiteColor];
+		_titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		
+		[self addSubview:_titleLabel];
+	}
+	return _titleLabel;
+}
 
 @end

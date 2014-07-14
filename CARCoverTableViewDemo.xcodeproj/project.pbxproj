@@ -27,6 +27,7 @@
 		2CD749C1196FC9E400C73FB1 /* CARCoverScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749C0196FC9E400C73FB1 /* CARCoverScrollViewController.m */; };
 		2CD749C4196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749C3196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m */; };
 		2CD749C6196FCC1C00C73FB1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD749C5196FCC1C00C73FB1 /* CoreData.framework */; };
+		2CD749C91970337700C73FB1 /* CARCoverScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749C81970337700C73FB1 /* CARCoverScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		2CD749C2196FC9FC00C73FB1 /* DEMOCoverScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOCoverScrollViewController.h; sourceTree = "<group>"; };
 		2CD749C3196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOCoverScrollViewController.m; sourceTree = "<group>"; };
 		2CD749C5196FCC1C00C73FB1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2CD749C71970337700C73FB1 /* CARCoverScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverScrollView.h; sourceTree = "<group>"; };
+		2CD749C81970337700C73FB1 /* CARCoverScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARCoverScrollView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +182,8 @@
 			children = (
 				2CD749B5196D4CEC00C73FB1 /* CARCoverTableView.h */,
 				2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */,
+				2CD749C71970337700C73FB1 /* CARCoverScrollView.h */,
+				2CD749C81970337700C73FB1 /* CARCoverScrollView.m */,
 				2CD749BF196FC9E400C73FB1 /* CARCoverScrollViewController.h */,
 				2CD749C0196FC9E400C73FB1 /* CARCoverScrollViewController.m */,
 			);
@@ -289,6 +294,7 @@
 				2CD749B7196D4CEC00C73FB1 /* CARCoverTableView.m in Sources */,
 				2CD749C4196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m in Sources */,
 				2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */,
+				2CD749C91970337700C73FB1 /* CARCoverScrollView.m in Sources */,
 				2CD749C1196FC9E400C73FB1 /* CARCoverScrollViewController.m in Sources */,
 				2CD749BA196D4DD000C73FB1 /* DEMOImageViewController.m in Sources */,
 			);
@@ -429,6 +435,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CARCoverTableViewDemo/CARCoverTableViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "CARCoverTableViewDemo/CARCoverTableViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3041FF5D-DD18-4C53-A350-0C66D4F7296D";
 				WRAPPER_EXTENSION = app;
@@ -444,6 +451,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CARCoverTableViewDemo/CARCoverTableViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "CARCoverTableViewDemo/CARCoverTableViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3041FF5D-DD18-4C53-A350-0C66D4F7296D";
 				WRAPPER_EXTENSION = app;
@@ -509,6 +517,7 @@
 				2CD749B0196D4CAE00C73FB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2CD749B1196D4CAE00C73FB1 /* Build configuration list for PBXNativeTarget "CARCoverTableViewDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +526,7 @@
 				2CD749B3196D4CAE00C73FB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
