@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSIndexSet *previousVisibleIndices;
 @property (nonatomic, assign) NSInteger itemCount;
 @property (nonatomic, assign, getter = isReloadingData) BOOL reloadingData;
+@property (nonatomic, strong) NSDate *previousLayoutDate;
+@property (nonatomic, assign) CGPoint previousOffset;
 
 - (void)initializeCoverScrollView;
 
@@ -36,6 +38,8 @@
 
 - (void)initializeView:(UIView *)view;
 - (void)viewDidSelect:(CARCoverScrollViewSelectionRecognizer *)gestureRecognizer;
+
+- (void)sendVelocityToDelegate;
 
 @end
 
@@ -184,12 +188,36 @@
 	self.contentSize = contentSize;
 }
 
+#pragma mark - Delegation
+- (void)sendVelocityToDelegate {
+	
+	NSDate *now = [NSDate date];
+	
+	if (self.previousLayoutDate) {
+		if ([self.delegate respondsToSelector:@selector(scrollView:didScrollWithVelocity:)]) {
+			
+// DoNotRevert: self.panGestureRecognizer.velocityInView では慣性スクロール時の速度（指が離れてからの速度）がとれないため
+//			CGPoint velocity = [self.panGestureRecognizer velocityInView:self];
+			
+			NSTimeInterval interval = [now timeIntervalSinceDate:self.previousLayoutDate];
+			CGFloat diffX = self.contentOffset.x - self.previousOffset.x;
+			CGFloat velocity = diffX / interval;
+			
+			[self.delegate scrollView:self didScrollWithVelocity:velocity];
+		}
+	}
+
+	self.previousLayoutDate = now;
+	self.previousOffset = self.contentOffset;
+}
+
 #pragma mark - Layout
 - (void)layoutSubviews {
 	
 	[super layoutSubviews];
 	
 	[self prepareViews];
+	[self sendVelocityToDelegate];
 }
 
 - (void)prepareViews {

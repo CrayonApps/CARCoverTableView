@@ -19,13 +19,24 @@
 @class CARCoverScrollView;
 
 @protocol CARCoverScrollViewDataSource <NSObject>
+
 @required
 - (NSInteger)numberOfItemsInScrollView:(CARCoverScrollView *)scrollView;
 - (UIView *)scrollView:(CARCoverScrollView *)scrollView viewAtIndex:(NSInteger)index;
+
 @end
 
 @protocol CARCoverScrollViewDelegate <NSObject, UIScrollViewDelegate>
+
+@optional
 - (void)scrollView:(CARCoverScrollView *)scrollView didSelectItemAtIndex:(NSInteger)index;
+
+/**
+ layoutSubviews でトリガされるので実際にスクロールしているかどうかはdelegate側で判定する必要がある
+ @param velocity x 軸の速度
+ */
+- (void)scrollView:(CARCoverScrollView *)scrollView didScrollWithVelocity:(CGFloat)velocity;
+
 @end
 
 @interface CARCoverScrollView : UIScrollView
