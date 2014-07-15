@@ -8,10 +8,6 @@
 
 #import "DEMOCoverScrollViewController.h"
 
-@interface DEMOCoverScrollCell : UICollectionViewCell
-@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@end
-
 @interface DEMOCoverScrollView : UIView
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @end
@@ -101,6 +97,11 @@
 	return cell;
 }
 
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSLog(@"%d-%d cell selected", self.coverScrollView.currentIndex, indexPath.row);
+}
+
 #pragma mark - CARCoverScrollViewDataSource
 - (NSInteger)numberOfItemsInScrollView:(CARCoverScrollView *)scrollView {
 	return 10;
@@ -118,6 +119,7 @@
 	return view;
 }
 
+#pragma mark - CARCoverScrollViewDelegate
 - (void)scrollView:(CARCoverScrollView *)scrollView didSelectItemAtIndex:(NSInteger)index {
 	NSLog(@"%d view selected", index);
 }
@@ -139,10 +141,6 @@
 		[self changeItemsToIndex:@(index) animated:YES];
 	}
 }
-
-@end
-
-@implementation DEMOCoverScrollCell
 
 @end
 
