@@ -13,13 +13,10 @@
 
 /**
  @brief
- UIScrollViewDelegate のいくつかを使用しているのでサブクラスする場合は必要に応じてsuperを呼ぶこと
  */
 @interface CARCoverScrollViewController : UITableViewController
 
 @property (nonatomic, weak) IBOutlet CARCoverScrollView *coverScrollView;
 @property (nonatomic, readonly) CARCoverTableView *coverTableView;
-
-- (void)coverScrollViewDidFinishScrolling;
 
 @end

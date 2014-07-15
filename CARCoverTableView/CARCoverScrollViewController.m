@@ -43,11 +43,6 @@
 	return (CARCoverTableView *)self.tableView;
 }
 
-#pragma mark - CARCoverScrollViewController
-- (void)coverScrollViewDidFinishScrolling {
-	
-}
-
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

@@ -38,6 +38,8 @@
 @property (nonatomic, weak) IBOutlet id <CARCoverScrollViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id <CARCoverScrollViewDelegate> delegate;
 
+@property (nonatomic, readonly) NSInteger currentIndex;
+
 /**
  スクロール時はページングしないが、停止時にはページ単位で止まる
  */

@@ -65,6 +65,7 @@
 @synthesize roughPagingEnabled = _roughPagingEnabled;
 
 @dynamic visibleIndices;
+@dynamic currentIndex;
 
 #pragma mark - Lifecycle
 - (id)initWithFrame:(CGRect)frame {
@@ -106,6 +107,10 @@
 	
 	_coverScrollViewDelegate = delegate;
 	[super setDelegate:delegate];
+}
+
+- (NSInteger)currentIndex {
+	return (self.contentOffset.x / self.bounds.size.width);
 }
 
 - (NSInteger)itemCount {
