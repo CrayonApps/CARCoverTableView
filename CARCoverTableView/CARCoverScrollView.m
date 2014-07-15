@@ -16,15 +16,18 @@
 
 @interface CARCoverScrollView ()
 
-@property (nonatomic, strong) NSMutableArray *reusableViews;
-@property (nonatomic, strong) NSMutableDictionary *allViews;
+// 変更が一カ所のみのプロパティをreadonlyにしてみるテスト
+@property (nonatomic, readonly) NSMutableArray *reusableViews;
+@property (nonatomic, readonly) NSMutableDictionary *allViews;
 @property (nonatomic, weak) NSArray *defaultSubviews;
 
-@property (nonatomic, strong) NSIndexSet *previousVisibleIndices;
-@property (nonatomic, assign) NSInteger itemCount;
+@property (nonatomic, readonly) NSIndexSet *previousVisibleIndices;
+@property (nonatomic, readonly) NSInteger itemCount;
 @property (nonatomic, assign, getter = isReloadingData) BOOL reloadingData;
-@property (nonatomic, strong) NSDate *previousLayoutDate;
-@property (nonatomic, assign) CGPoint previousOffset;
+@property (nonatomic, readonly) NSDate *previousLayoutDate;
+@property (nonatomic, readonly) CGPoint previousOffset;
+@property (nonatomic, readonly) CGPoint velocity;
+@property (nonatomic, assign, getter = isInertialScrolling) BOOL inertialScrolling;
 
 - (void)initializeCoverScrollView;
 
@@ -39,14 +42,27 @@
 - (void)initializeView:(UIView *)view;
 - (void)viewDidSelect:(CARCoverScrollViewSelectionRecognizer *)gestureRecognizer;
 
-- (void)sendVelocityToDelegate;
+- (void)calculateVelocity;
+
+/**
+ ページを中央に揃える
+ */
+- (void)fitCoverScrollViewPage;
+- (void)didPan:(UIPanGestureRecognizer *)recognizer;
 
 @end
 
 @implementation CARCoverScrollView
 
 @synthesize delegate = _coverScrollViewDelegate;
+@synthesize reusableViews = _reusableViews;
+@synthesize allViews = _allViews;
+@synthesize previousVisibleIndices = _previousVisibleIndices;
 @synthesize itemCount = _itemCount;
+@synthesize previousLayoutDate = _previousLayoutDate;
+@synthesize previousOffset = _previousOffset;
+@synthesize velocity = _velocity;
+@synthesize roughPagingEnabled = _roughPagingEnabled;
 
 @dynamic visibleIndices;
 
@@ -67,12 +83,15 @@
 
 - (void)initializeCoverScrollView {
 	
-	self.reusableViews = [[NSMutableArray alloc] init];
-	self.allViews = [[NSMutableDictionary alloc] init];
+	_reusableViews = [[NSMutableArray alloc] init];
+	_allViews = [[NSMutableDictionary alloc] init];
 	self.defaultSubviews = self.subviews.copy;
 	
 	self.scrollsToTop = NO;
 	self.backgroundColor = [UIColor whiteColor];
+	
+	NSAssert(self.panGestureRecognizer, @"");
+	[self.panGestureRecognizer addTarget:self action:@selector(didPan:)];
 }
 
 #pragma mark - Accessor
@@ -95,6 +114,15 @@
 		[self reloadItemCount];
 	}
 	return _itemCount;
+}
+
+- (void)setRoughPagingEnabled:(BOOL)roughPagingEnabled {
+	
+	if (roughPagingEnabled) {
+		[self fitCoverScrollViewPage];
+	}
+	
+	_roughPagingEnabled = roughPagingEnabled;
 }
 
 - (NSIndexSet *)visibleIndices {
@@ -189,26 +217,40 @@
 }
 
 #pragma mark - Delegation
-- (void)sendVelocityToDelegate {
+- (void)calculateVelocity {
+	
+	// layoutSubviews 以外から呼ばれることは想定していない
 	
 	NSDate *now = [NSDate date];
+	NSTimeInterval interval = [now timeIntervalSinceDate:self.previousLayoutDate];
+
+	if (interval < 0.01) {
+		// スクロールのないときに呼ばれることを防ぐため：スクロール時に layoutSubviews が呼ばれる間隔を測ったところ 0.01~0.03 だった
+		return;
+	}
 	
 	if (self.previousLayoutDate) {
-		if ([self.delegate respondsToSelector:@selector(scrollView:didScrollWithVelocity:)]) {
-			
-// DoNotRevert: self.panGestureRecognizer.velocityInView では慣性スクロール時の速度（指が離れてからの速度）がとれないため
-//			CGPoint velocity = [self.panGestureRecognizer velocityInView:self];
-			
-			NSTimeInterval interval = [now timeIntervalSinceDate:self.previousLayoutDate];
-			CGFloat diffX = self.contentOffset.x - self.previousOffset.x;
-			CGFloat velocity = diffX / interval;
-			
-			[self.delegate scrollView:self didScrollWithVelocity:velocity];
+		// 最後の _previousLayoutDate 代入があるので、if条件を逆にしてreturnができない
+		
+		CGPoint diff = CGPointZero;
+		diff.x = self.contentOffset.x - self.previousOffset.x;
+		diff.y = self.contentOffset.y - self.previousOffset.y;
+		
+		CGPoint currentVelocity = CGPointZero;
+		currentVelocity.x = diff.x / interval;
+		currentVelocity.y = diff.y / interval;
+		
+		_velocity = currentVelocity;
+		
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fitCoverScrollViewPage) object:nil];
+		
+		if (fabsf(self.velocity.x) < 200.0f) {
+			[self fitCoverScrollViewPage];
 		}
 	}
 
-	self.previousLayoutDate = now;
-	self.previousOffset = self.contentOffset;
+	_previousLayoutDate = now;
+	_previousOffset = self.contentOffset;
 }
 
 #pragma mark - Layout
@@ -217,7 +259,7 @@
 	[super layoutSubviews];
 	
 	[self prepareViews];
-	[self sendVelocityToDelegate];
+	[self calculateVelocity];
 }
 
 - (void)prepareViews {
@@ -275,7 +317,7 @@
 		[self bringSubviewToFront:view];
 	}
 	
-	self.previousVisibleIndices = visibleIndices.copy;
+	_previousVisibleIndices = visibleIndices.copy;
 	
 	self.reloadingData = NO;
 }
@@ -311,6 +353,85 @@
 		
 		[self.delegate scrollView:self didSelectItemAtIndex:index];
 	}
+}
+
+#pragma mark - UIPanGestureRecognizer Receivers
+- (void)didPan:(UIPanGestureRecognizer *)recognizer {
+	
+	switch (recognizer.state) {
+		case UIGestureRecognizerStateChanged:
+			self.inertialScrolling = NO;
+			break;
+			
+		case UIGestureRecognizerStateEnded:
+		case UIGestureRecognizerStateCancelled:
+		case UIGestureRecognizerStateFailed: {
+			
+			CGPoint velocityInView = [recognizer velocityInView:self];
+			self.inertialScrolling = YES;
+			
+			if (velocityInView.x == 0.0f) {
+				[self fitCoverScrollViewPage];
+			}
+			else {
+				// didPan より layoutSubviews の方が先に呼ばれるのでここであらかじめ呼んでおく。
+				// スクロールが
+				[self performSelector:@selector(fitCoverScrollViewPage) withObject:nil afterDelay:0.05];
+			}
+			break;
+		}
+		default:
+			break;
+	}
+}
+
+- (void)fitCoverScrollViewPage {
+
+	if (self.inertialScrolling == NO) {
+		return;
+	}
+	self.inertialScrolling = NO;
+	
+	if (self.isRoughPagingEnabled == NO) {
+		return;
+	}
+	
+	CGFloat x = self.contentOffset.x;
+	CGFloat boundsWidth = self.bounds.size.width;
+	
+	if (boundsWidth == 0.0f) {
+		return;
+	}
+	
+	NSInteger floorX = floorf(x);
+	NSInteger floorBoundsWidth = floorf(boundsWidth);
+	NSInteger index = floorX / floorBoundsWidth;
+	
+	if (index == (x / boundsWidth)) {
+		// fitしている場合
+		return;
+	}
+	
+	CGFloat threshold = (boundsWidth * index) + (boundsWidth / 2.0f);
+	CGPoint contentOffset = self.contentOffset;
+	
+	if (x > threshold) {
+		contentOffset.x = boundsWidth * (index + 1);
+	}
+	else {
+		contentOffset.x = boundsWidth * index;
+	}
+	
+	CGFloat maxContentOffsetX = self.contentSize.width - boundsWidth;
+	
+	if (contentOffset.x < 0.0f) {
+		contentOffset.x = 0.0f;
+	}
+	else if (contentOffset.x > maxContentOffsetX) {
+		contentOffset.x = maxContentOffsetX;
+	}
+	
+	[self setContentOffset:contentOffset animated:YES];
 }
 
 @end

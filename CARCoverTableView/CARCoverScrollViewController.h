@@ -20,12 +20,6 @@
 @property (nonatomic, weak) IBOutlet CARCoverScrollView *coverScrollView;
 @property (nonatomic, readonly) CARCoverTableView *coverTableView;
 
-/**
- スクロール時はページングしないが、停止時にはページ単位で止まる
- CARCoverScrollView に実装したいが、 UIScrollViewDelegate のメソッドを使用する関係でこちらに実装している
- */
-@property (nonatomic, assign, getter = isRoughPagingEnabled) BOOL roughPagingEnabled;
-
 - (void)coverScrollViewDidFinishScrolling;
 
 @end

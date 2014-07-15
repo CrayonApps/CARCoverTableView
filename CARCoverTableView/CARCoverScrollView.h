@@ -31,18 +31,17 @@
 @optional
 - (void)scrollView:(CARCoverScrollView *)scrollView didSelectItemAtIndex:(NSInteger)index;
 
-/**
- layoutSubviews でトリガされるので実際にスクロールしているかどうかはdelegate側で判定する必要がある
- @param velocity x 軸の速度
- */
-- (void)scrollView:(CARCoverScrollView *)scrollView didScrollWithVelocity:(CGFloat)velocity;
-
 @end
 
 @interface CARCoverScrollView : UIScrollView
 
 @property (nonatomic, weak) IBOutlet id <CARCoverScrollViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id <CARCoverScrollViewDelegate> delegate;
+
+/**
+ スクロール時はページングしないが、停止時にはページ単位で止まる
+ */
+@property (nonatomic, assign, getter = isRoughPagingEnabled) BOOL roughPagingEnabled;
 
 /**
  visibleIndices.count > 2 になるような状態は想定していない
