@@ -18,6 +18,13 @@
 
 @dynamic coverTableView;
 
+- (void)loadView {
+	
+	self.view = [[CARCoverTableView alloc] init];
+	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//	self.tableView = self.view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

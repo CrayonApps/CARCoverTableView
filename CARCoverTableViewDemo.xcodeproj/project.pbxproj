@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C901F33197B814B001BE33B /* DEMOSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C901F32197B814B001BE33B /* DEMOSampleViewController.m */; };
 		2CD7497D196D4CAE00C73FB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7497C196D4CAE00C73FB1 /* Foundation.framework */; };
 		2CD7497F196D4CAE00C73FB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7497E196D4CAE00C73FB1 /* CoreGraphics.framework */; };
 		2CD74981196D4CAE00C73FB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD74980196D4CAE00C73FB1 /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C901F31197B814B001BE33B /* DEMOSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOSampleViewController.h; sourceTree = "<group>"; };
+		2C901F32197B814B001BE33B /* DEMOSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOSampleViewController.m; sourceTree = "<group>"; };
 		2CD74979196D4CAE00C73FB1 /* CARCoverTableViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CARCoverTableViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD7497C196D4CAE00C73FB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2CD7497E196D4CAE00C73FB1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +143,8 @@
 				2CD749B9196D4DD000C73FB1 /* DEMOImageViewController.m */,
 				2CD749C2196FC9FC00C73FB1 /* DEMOCoverScrollViewController.h */,
 				2CD749C3196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m */,
+				2C901F31197B814B001BE33B /* DEMOSampleViewController.h */,
+				2C901F32197B814B001BE33B /* DEMOSampleViewController.m */,
 				2CD749BD196F904000C73FB1 /* image001.png */,
 				2CD74997196D4CAE00C73FB1 /* Images.xcassets */,
 				2CD749B4196D4CD700C73FB1 /* CARCoverTableView */,
@@ -293,6 +298,7 @@
 				2CD74989196D4CAE00C73FB1 /* main.m in Sources */,
 				2CD749B7196D4CEC00C73FB1 /* CARCoverTableView.m in Sources */,
 				2CD749C4196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m in Sources */,
+				2C901F33197B814B001BE33B /* DEMOSampleViewController.m in Sources */,
 				2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */,
 				2CD749C91970337700C73FB1 /* CARCoverScrollView.m in Sources */,
 				2CD749C1196FC9E400C73FB1 /* CARCoverScrollViewController.m in Sources */,
@@ -437,7 +443,7 @@
 				INFOPLIST_FILE = "CARCoverTableViewDemo/CARCoverTableViewDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3041FF5D-DD18-4C53-A350-0C66D4F7296D";
+				PROVISIONING_PROFILE = "9a9d3934-5c5d-441b-8fb7-5332c12a4809";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -453,7 +459,7 @@
 				INFOPLIST_FILE = "CARCoverTableViewDemo/CARCoverTableViewDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3041FF5D-DD18-4C53-A350-0C66D4F7296D";
+				PROVISIONING_PROFILE = "9a9d3934-5c5d-441b-8fb7-5332c12a4809";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

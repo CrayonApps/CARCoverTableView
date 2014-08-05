@@ -126,7 +126,10 @@
 }
 
 - (void)initializeCoverTableView {
+	
 	self.minimumCoverHeight = 200.0f;
+	self.coverView.clipsToBounds = YES;
+	self.borderView.clipsToBounds = YES;
 }
 
 - (void)layoutSubviews {
