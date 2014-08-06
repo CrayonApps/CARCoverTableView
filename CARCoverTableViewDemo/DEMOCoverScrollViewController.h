@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 CrayonApps Inc. All rights reserved.
 //
 
-#import "CARCoverScrollViewController.h"
+#import "CARCoverTableViewController.h"
 #import <CoreData/CoreData.h>
 
-@interface DEMOCoverScrollViewController : CARCoverScrollViewController
+@interface DEMOCoverScrollViewController : CARCoverTableViewController
 
 //@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 

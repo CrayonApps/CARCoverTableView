@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 CrayonApps Inc. All rights reserved.
 //
 
-#import "CARCoverScrollViewController.h"
+#import "CARCoverTableViewController.h"
 
-@interface CARCoverScrollViewController ()
+@interface CARCoverTableViewController ()
 
 @property (nonatomic, assign, getter = isScrolling) BOOL scrolling;
 
 @end
 
-@implementation CARCoverScrollViewController
+@implementation CARCoverTableViewController
 
 @dynamic coverTableView;
 

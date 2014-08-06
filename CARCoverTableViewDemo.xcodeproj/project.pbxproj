@@ -28,7 +28,7 @@
 		2CD749B7196D4CEC00C73FB1 /* CARCoverTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */; };
 		2CD749BA196D4DD000C73FB1 /* DEMOImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749B9196D4DD000C73FB1 /* DEMOImageViewController.m */; };
 		2CD749BE196F904000C73FB1 /* image001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD749BD196F904000C73FB1 /* image001.png */; };
-		2CD749C1196FC9E400C73FB1 /* CARCoverScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749C0196FC9E400C73FB1 /* CARCoverScrollViewController.m */; };
+		2CD749C1196FC9E400C73FB1 /* CARCoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749C0196FC9E400C73FB1 /* CARCoverTableViewController.m */; };
 		2CD749C4196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749C3196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m */; };
 		2CD749C6196FCC1C00C73FB1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD749C5196FCC1C00C73FB1 /* CoreData.framework */; };
 		2CD749C91970337700C73FB1 /* CARCoverScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD749C81970337700C73FB1 /* CARCoverScrollView.m */; };
@@ -75,8 +75,8 @@
 		2CD749B8196D4DD000C73FB1 /* DEMOImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOImageViewController.h; sourceTree = "<group>"; };
 		2CD749B9196D4DD000C73FB1 /* DEMOImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOImageViewController.m; sourceTree = "<group>"; };
 		2CD749BD196F904000C73FB1 /* image001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image001.png; sourceTree = "<group>"; };
-		2CD749BF196FC9E400C73FB1 /* CARCoverScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverScrollViewController.h; sourceTree = "<group>"; };
-		2CD749C0196FC9E400C73FB1 /* CARCoverScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARCoverScrollViewController.m; sourceTree = "<group>"; };
+		2CD749BF196FC9E400C73FB1 /* CARCoverTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverTableViewController.h; sourceTree = "<group>"; };
+		2CD749C0196FC9E400C73FB1 /* CARCoverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARCoverTableViewController.m; sourceTree = "<group>"; };
 		2CD749C2196FC9FC00C73FB1 /* DEMOCoverScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOCoverScrollViewController.h; sourceTree = "<group>"; };
 		2CD749C3196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOCoverScrollViewController.m; sourceTree = "<group>"; };
 		2CD749C5196FCC1C00C73FB1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -203,8 +203,8 @@
 				2CB2AFAE1990F47300898729 /* CARCoverCollectionView.m */,
 				2CD749C71970337700C73FB1 /* CARCoverScrollView.h */,
 				2CD749C81970337700C73FB1 /* CARCoverScrollView.m */,
-				2CD749BF196FC9E400C73FB1 /* CARCoverScrollViewController.h */,
-				2CD749C0196FC9E400C73FB1 /* CARCoverScrollViewController.m */,
+				2CD749BF196FC9E400C73FB1 /* CARCoverTableViewController.h */,
+				2CD749C0196FC9E400C73FB1 /* CARCoverTableViewController.m */,
 			);
 			path = CARCoverTableView;
 			sourceTree = SOURCE_ROOT;
@@ -316,7 +316,7 @@
 				2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */,
 				2CB2AFB21990F54E00898729 /* DEMOCoverCollectionViewController.m in Sources */,
 				2CD749C91970337700C73FB1 /* CARCoverScrollView.m in Sources */,
-				2CD749C1196FC9E400C73FB1 /* CARCoverScrollViewController.m in Sources */,
+				2CD749C1196FC9E400C73FB1 /* CARCoverTableViewController.m in Sources */,
 				2CD749BA196D4DD000C73FB1 /* DEMOImageViewController.m in Sources */,
 				2CB2AFAF1990F47300898729 /* CARCoverCollectionView.m in Sources */,
 			);

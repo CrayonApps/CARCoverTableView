@@ -8,7 +8,7 @@
 
 #import "DEMOSampleViewController.h"
 
-#import "CARCoverScrollViewController.h"
+#import "CARCoverTableViewController.h"
 
 @interface DEMOSampleViewController ()
 
@@ -47,7 +47,7 @@
 				case 1: {
 					// CoverScrollViewController
 					
-					CARCoverScrollViewController *scrollViewController = [[CARCoverScrollViewController alloc] init];
+					CARCoverTableViewController *scrollViewController = [[CARCoverTableViewController alloc] init];
 					
 					
 					break;

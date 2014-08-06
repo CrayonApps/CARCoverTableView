@@ -14,7 +14,7 @@
 /**
  @brief
  */
-@interface CARCoverScrollViewController : UITableViewController
+@interface CARCoverTableViewController : UITableViewController
 
 @property (nonatomic, weak) IBOutlet CARCoverScrollView *coverScrollView;
 @property (nonatomic, readonly) CARCoverTableView *coverTableView;
