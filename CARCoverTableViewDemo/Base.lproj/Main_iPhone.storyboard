@@ -94,7 +94,6 @@
                     <connections>
                         <segue destination="2QA-13-aGn" kind="relationship" relationship="viewControllers" id="Wbi-G4-vVD"/>
                         <segue destination="5vC-DC-f4K" kind="relationship" relationship="viewControllers" id="MB7-g2-RXF"/>
-                        <segue destination="Nd0-OB-dzo" kind="relationship" relationship="viewControllers" id="yKD-l8-D8C"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zC7-Bb-0dY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -318,22 +317,17 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <view key="backgroundView" contentMode="scaleToFill" id="InL-fq-XeZ">
+                        <scrollView key="backgroundView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="TcO-aU-JEl">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image001.png" id="CO7-gh-F7S">
+                                <view hidden="YES" contentMode="scaleToFill" id="AMu-Up-jFr">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
-                                <view hidden="YES" contentMode="scaleToFill" id="9eA-L0-fPi">
-                                    <rect key="frame" x="0.0" y="380" width="320" height="104"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
+                        </scrollView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="m2I-Uu-gbf">
                                 <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
@@ -347,8 +341,8 @@
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="borderView" destination="9eA-L0-fPi" id="GfJ-x7-Aix"/>
-                            <outlet property="coverView" destination="InL-fq-XeZ" id="c3t-eb-EdX"/>
+                            <outlet property="borderView" destination="AMu-Up-jFr" id="Wzo-u9-KIk"/>
+                            <outlet property="coverView" destination="TcO-aU-JEl" id="VK2-3g-LjE"/>
                             <outlet property="dataSource" destination="Nd0-OB-dzo" id="eLS-Tm-59s"/>
                             <outlet property="delegate" destination="Nd0-OB-dzo" id="A7w-DV-yCd"/>
                         </connections>

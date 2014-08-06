@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C1ACAA519924C5800DC5AEC /* CARCoverCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1ACAA419924C5800DC5AEC /* CARCoverCollectionViewController.m */; };
 		2C901F33197B814B001BE33B /* DEMOSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C901F32197B814B001BE33B /* DEMOSampleViewController.m */; };
 		2CB2AFAF1990F47300898729 /* CARCoverCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2AFAE1990F47300898729 /* CARCoverCollectionView.m */; };
 		2CB2AFB21990F54E00898729 /* DEMOCoverCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2AFB11990F54E00898729 /* DEMOCoverCollectionViewController.m */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C1ACAA319924C5800DC5AEC /* CARCoverCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverCollectionViewController.h; sourceTree = "<group>"; };
+		2C1ACAA419924C5800DC5AEC /* CARCoverCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARCoverCollectionViewController.m; sourceTree = "<group>"; };
 		2C901F31197B814B001BE33B /* DEMOSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOSampleViewController.h; sourceTree = "<group>"; };
 		2C901F32197B814B001BE33B /* DEMOSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOSampleViewController.m; sourceTree = "<group>"; };
 		2CB2AFAD1990F47300898729 /* CARCoverCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverCollectionView.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				2CD749C81970337700C73FB1 /* CARCoverScrollView.m */,
 				2CD749BF196FC9E400C73FB1 /* CARCoverTableViewController.h */,
 				2CD749C0196FC9E400C73FB1 /* CARCoverTableViewController.m */,
+				2C1ACAA319924C5800DC5AEC /* CARCoverCollectionViewController.h */,
+				2C1ACAA419924C5800DC5AEC /* CARCoverCollectionViewController.m */,
 			);
 			path = CARCoverTableView;
 			sourceTree = SOURCE_ROOT;
@@ -315,6 +320,7 @@
 				2C901F33197B814B001BE33B /* DEMOSampleViewController.m in Sources */,
 				2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */,
 				2CB2AFB21990F54E00898729 /* DEMOCoverCollectionViewController.m in Sources */,
+				2C1ACAA519924C5800DC5AEC /* CARCoverCollectionViewController.m in Sources */,
 				2CD749C91970337700C73FB1 /* CARCoverScrollView.m in Sources */,
 				2CD749C1196FC9E400C73FB1 /* CARCoverTableViewController.m in Sources */,
 				2CD749BA196D4DD000C73FB1 /* DEMOImageViewController.m in Sources */,
