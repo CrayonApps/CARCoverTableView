@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2C901F33197B814B001BE33B /* DEMOSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C901F32197B814B001BE33B /* DEMOSampleViewController.m */; };
+		2CB2AFAF1990F47300898729 /* CARCoverCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2AFAE1990F47300898729 /* CARCoverCollectionView.m */; };
+		2CB2AFB21990F54E00898729 /* DEMOCoverCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2AFB11990F54E00898729 /* DEMOCoverCollectionViewController.m */; };
+		2CB2AFB41991D16E00898729 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB2AFB31991D16E00898729 /* QuartzCore.framework */; };
 		2CD7497D196D4CAE00C73FB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7497C196D4CAE00C73FB1 /* Foundation.framework */; };
 		2CD7497F196D4CAE00C73FB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD7497E196D4CAE00C73FB1 /* CoreGraphics.framework */; };
 		2CD74981196D4CAE00C73FB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD74980196D4CAE00C73FB1 /* UIKit.framework */; };
@@ -44,6 +47,11 @@
 /* Begin PBXFileReference section */
 		2C901F31197B814B001BE33B /* DEMOSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOSampleViewController.h; sourceTree = "<group>"; };
 		2C901F32197B814B001BE33B /* DEMOSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOSampleViewController.m; sourceTree = "<group>"; };
+		2CB2AFAD1990F47300898729 /* CARCoverCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARCoverCollectionView.h; sourceTree = "<group>"; };
+		2CB2AFAE1990F47300898729 /* CARCoverCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARCoverCollectionView.m; sourceTree = "<group>"; };
+		2CB2AFB01990F54E00898729 /* DEMOCoverCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOCoverCollectionViewController.h; sourceTree = "<group>"; };
+		2CB2AFB11990F54E00898729 /* DEMOCoverCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOCoverCollectionViewController.m; sourceTree = "<group>"; };
+		2CB2AFB31991D16E00898729 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2CD74979196D4CAE00C73FB1 /* CARCoverTableViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CARCoverTableViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD7497C196D4CAE00C73FB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2CD7497E196D4CAE00C73FB1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB2AFB41991D16E00898729 /* QuartzCore.framework in Frameworks */,
 				2CD749C6196FCC1C00C73FB1 /* CoreData.framework in Frameworks */,
 				2CD7497F196D4CAE00C73FB1 /* CoreGraphics.framework in Frameworks */,
 				2CD74981196D4CAE00C73FB1 /* UIKit.framework in Frameworks */,
@@ -123,6 +132,7 @@
 		2CD7497B196D4CAE00C73FB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CB2AFB31991D16E00898729 /* QuartzCore.framework */,
 				2CD749C5196FCC1C00C73FB1 /* CoreData.framework */,
 				2CD7497C196D4CAE00C73FB1 /* Foundation.framework */,
 				2CD7497E196D4CAE00C73FB1 /* CoreGraphics.framework */,
@@ -145,6 +155,8 @@
 				2CD749C3196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m */,
 				2C901F31197B814B001BE33B /* DEMOSampleViewController.h */,
 				2C901F32197B814B001BE33B /* DEMOSampleViewController.m */,
+				2CB2AFB01990F54E00898729 /* DEMOCoverCollectionViewController.h */,
+				2CB2AFB11990F54E00898729 /* DEMOCoverCollectionViewController.m */,
 				2CD749BD196F904000C73FB1 /* image001.png */,
 				2CD74997196D4CAE00C73FB1 /* Images.xcassets */,
 				2CD749B4196D4CD700C73FB1 /* CARCoverTableView */,
@@ -187,6 +199,8 @@
 			children = (
 				2CD749B5196D4CEC00C73FB1 /* CARCoverTableView.h */,
 				2CD749B6196D4CEC00C73FB1 /* CARCoverTableView.m */,
+				2CB2AFAD1990F47300898729 /* CARCoverCollectionView.h */,
+				2CB2AFAE1990F47300898729 /* CARCoverCollectionView.m */,
 				2CD749C71970337700C73FB1 /* CARCoverScrollView.h */,
 				2CD749C81970337700C73FB1 /* CARCoverScrollView.m */,
 				2CD749BF196FC9E400C73FB1 /* CARCoverScrollViewController.h */,
@@ -300,9 +314,11 @@
 				2CD749C4196FC9FC00C73FB1 /* DEMOCoverScrollViewController.m in Sources */,
 				2C901F33197B814B001BE33B /* DEMOSampleViewController.m in Sources */,
 				2CD7498D196D4CAE00C73FB1 /* CARAppDelegate.m in Sources */,
+				2CB2AFB21990F54E00898729 /* DEMOCoverCollectionViewController.m in Sources */,
 				2CD749C91970337700C73FB1 /* CARCoverScrollView.m in Sources */,
 				2CD749C1196FC9E400C73FB1 /* CARCoverScrollViewController.m in Sources */,
 				2CD749BA196D4DD000C73FB1 /* DEMOImageViewController.m in Sources */,
+				2CB2AFAF1990F47300898729 /* CARCoverCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
