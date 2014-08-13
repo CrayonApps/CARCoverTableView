@@ -89,7 +89,6 @@
 	self.defaultSubviews = self.subviews.copy;
 	
 	self.scrollsToTop = NO;
-	self.backgroundColor = [UIColor whiteColor];
 	
 	NSAssert(self.panGestureRecognizer, @"");
 	[self.panGestureRecognizer addTarget:self action:@selector(didPan:)];

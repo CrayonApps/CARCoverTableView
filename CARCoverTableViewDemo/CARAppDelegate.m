@@ -8,12 +8,23 @@
 
 #import "CARAppDelegate.h"
 
+#import "DEMOCoverViewController.h"
+
 @implementation CARAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    return YES;
+
+	UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:tabBarController.viewControllers];
+	
+	UITableViewController *tableViewController = [tabBarController.storyboard instantiateViewControllerWithIdentifier:@"DEMOStaticTableView"];
+	DEMOCoverViewController *coverViewController = [[DEMOCoverViewController alloc] initWithRootViewController:tableViewController scrollView:tableViewController.tableView];
+	[viewControllers addObject:coverViewController];
+	
+	tabBarController.viewControllers = viewControllers;
+	
+	return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
