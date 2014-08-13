@@ -9,6 +9,8 @@
 #import "CARAppDelegate.h"
 
 #import "DEMOCoverViewController.h"
+#import "DEMOTableViewController.h"
+#import "DEMOCollectionViewController.h"
 
 @implementation CARAppDelegate
 
@@ -18,8 +20,10 @@
 	UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:tabBarController.viewControllers];
 	
-	UITableViewController *tableViewController = [tabBarController.storyboard instantiateViewControllerWithIdentifier:@"DEMOStaticTableView"];
-	DEMOCoverViewController *coverViewController = [[DEMOCoverViewController alloc] initWithRootViewController:tableViewController scrollView:tableViewController.tableView];
+	DEMOTableViewController *demoTableViewController = [tabBarController.storyboard instantiateViewControllerWithIdentifier:@"DEMOTableView"];
+	DEMOCollectionViewController *demoCollectionViewController = [tabBarController.storyboard instantiateViewControllerWithIdentifier:@"DEMOCollectionView"];
+	
+	DEMOCoverViewController *coverViewController = [[DEMOCoverViewController alloc] initWithRootViewController:demoCollectionViewController scrollView:demoCollectionViewController.collectionView];
 	[viewControllers addObject:coverViewController];
 	
 	tabBarController.viewControllers = viewControllers;
