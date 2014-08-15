@@ -30,6 +30,7 @@
 
 @optional
 - (void)scrollView:(CARCoverScrollView *)scrollView didSelectItemAtIndex:(NSInteger)index;
+- (void)scrollView:(CARCoverScrollView *)scrollView didUpdateCurrentIndex:(NSInteger)index;
 
 @end
 
@@ -38,7 +39,7 @@
 @property (nonatomic, weak) IBOutlet id <CARCoverScrollViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id <CARCoverScrollViewDelegate> delegate;
 
-@property (nonatomic, readonly) NSInteger currentIndex;
+@property (nonatomic, assign) NSInteger currentIndex;
 
 /**
  スクロール時はページングしないが、停止時にはページ単位で止まる
@@ -49,6 +50,8 @@
  visibleIndices.count > 2 になるような状態は想定していない
  */
 @property (nonatomic, readonly) NSIndexSet *visibleIndices;
+
+- (void)setCurrentIndex:(NSInteger)currentIndex animated:(BOOL)animated;
 
 - (void)reloadData;
 

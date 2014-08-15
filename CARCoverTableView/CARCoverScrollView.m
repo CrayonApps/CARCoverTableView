@@ -42,6 +42,7 @@
 - (void)initializeView:(UIView *)view;
 - (void)viewDidSelect:(CARCoverScrollViewSelectionRecognizer *)gestureRecognizer;
 
+- (void)updateCurrentIndex;
 - (void)calculateVelocity;
 
 /**
@@ -55,6 +56,7 @@
 @implementation CARCoverScrollView
 
 @synthesize delegate = _coverScrollViewDelegate;
+@synthesize currentIndex = _currentIndex;
 @synthesize reusableViews = _reusableViews;
 @synthesize allViews = _allViews;
 @synthesize previousVisibleIndices = _previousVisibleIndices;
@@ -65,12 +67,11 @@
 @synthesize roughPagingEnabled = _roughPagingEnabled;
 
 @dynamic visibleIndices;
-@dynamic currentIndex;
 
 #pragma mark - Lifecycle
 - (id)initWithFrame:(CGRect)frame {
 	
-	self = [super init];
+	self = [super initWithFrame:frame];
 	if (self) {
 		[self initializeCoverScrollView];
 	}
@@ -84,6 +85,7 @@
 
 - (void)initializeCoverScrollView {
 	
+	_itemCount = NSNotFound;
 	_reusableViews = [[NSMutableArray alloc] init];
 	_allViews = [[NSMutableDictionary alloc] init];
 	self.defaultSubviews = self.subviews.copy;
@@ -108,8 +110,23 @@
 	[super setDelegate:delegate];
 }
 
-- (NSInteger)currentIndex {
-	return (self.contentOffset.x / self.bounds.size.width);
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+	[self setCurrentIndex:currentIndex animated:NO];
+}
+
+- (void)setCurrentIndex:(NSInteger)currentIndex animated:(BOOL)animated {
+	
+	if (currentIndex >= self.itemCount) {
+		[NSException raise:NSInvalidArgumentException format:@"currentIndex cannot be larger than dataSource.numberOfItemsInScrollView:"];
+	}
+	
+	CGPoint contentOffset = self.contentOffset;
+	contentOffset.x = currentIndex * self.bounds.size.width;
+	
+	[self setContentOffset:contentOffset animated:animated];
+	
+	// TODO: 必要か？ delegateがちゃんと呼ばれるか？
+	//	_currentIndex = currentIndex;
 }
 
 - (NSInteger)itemCount {
@@ -220,7 +237,31 @@
 	self.contentSize = contentSize;
 }
 
-#pragma mark - Delegation
+#pragma mark -
+- (void)updateCurrentIndex {
+	
+	CGFloat x = self.contentOffset.x;
+	CGFloat width = self.bounds.size.width;
+	x += width / 2.0f;
+	
+	NSInteger newIndex = (NSInteger)(x / width);
+	
+	if (newIndex < 0) {
+		newIndex = 0;
+	}
+	if (newIndex >= self.itemCount) {
+		newIndex = self.itemCount - 1;
+	}
+	
+	if (newIndex != self.currentIndex) {
+		_currentIndex = newIndex;	// self.setCurrentIndexを呼ぶとcontentOffsetがアップデートされるので
+		
+		if ([self.delegate respondsToSelector:@selector(scrollView:didUpdateCurrentIndex:)]) {
+			[self.delegate scrollView:self didUpdateCurrentIndex:newIndex];
+		}
+	}
+}
+
 - (void)calculateVelocity {
 	
 	// layoutSubviews 以外から呼ばれることは想定していない
@@ -263,6 +304,7 @@
 	[super layoutSubviews];
 	
 	[self prepareViews];
+	[self updateCurrentIndex];
 	[self calculateVelocity];
 }
 

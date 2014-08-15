@@ -14,10 +14,16 @@
 /**
  @brief CoverTable/CollectionViewではcoverScrollViewで選択する階層に異なるViewControllerを置けなかった問題を解決したクラス
  ナビゲーション構造としてはUITabBarControllerと同じ
+ ContainerViewControllerだがCARCoverScrollViewDataSource, CARCoverScrollViewDelegateの扱いがあるのでサブクラス化して使う
+ サブクラス時に上書きする必要があるメソッドは以下
+ -scrollView:viewAtIndex:
  */
-@interface CARCoverScrollViewController : CARCoverViewController <CARCoverScrollViewDataSource, CARCoverScrollViewDelegate>
+@interface CARCoverScrollController : CARCoverViewController <CARCoverScrollViewDataSource, CARCoverScrollViewDelegate>
+
+@property (nonatomic, readonly) CARCoverScrollView *coverScrollView;
 
 @property (nonatomic, readonly) NSArray *viewControllers;
+@property (nonatomic, readonly) UIViewController *currentViewController;
 
 /**
  childController.scrollView.panGestureRecognizerの効果範囲をCARCoverScrollViewController.viewに広げるためscrollViewを引数に取っている。

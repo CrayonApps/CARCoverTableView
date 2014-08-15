@@ -9,6 +9,8 @@
 #import "CARAppDelegate.h"
 
 #import "DEMOCoverViewController.h"
+#import "DEMOCoverScrollViewController.h"
+
 #import "DEMOTableViewController.h"
 #import "DEMOCollectionViewController.h"
 
@@ -20,17 +22,39 @@
 	UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:tabBarController.viewControllers];
 	
-	DEMOTableViewController *demoTableViewController = [tabBarController.storyboard instantiateViewControllerWithIdentifier:@"DEMOTableView"];
-	DEMOCollectionViewController *demoCollectionViewController = [tabBarController.storyboard instantiateViewControllerWithIdentifier:@"DEMOCollectionView"];
-	
-	DEMOCoverViewController *coverViewController = [[DEMOCoverViewController alloc] initWithRootViewController:demoCollectionViewController scrollView:demoCollectionViewController.collectionView];
-	[viewControllers addObject:coverViewController];
+	[viewControllers addObject:[self demoCoverScrollViewController]];
+//	[viewControllers addObject:[self demoCoverViewController]];
 	
 	tabBarController.viewControllers = viewControllers;
 	
 	return YES;
 }
-							
+
+- (UITableViewController *)demoTableViewController {
+	return [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"DEMOTableView"];
+}
+
+- (UICollectionViewController *)demoCollectionViewController {
+	return [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"DEMOCollectionView"];
+}
+
+- (UIViewController *)demoCoverViewController {
+	
+	UITableViewController *demoTableViewController = [self demoTableViewController];
+	return [[DEMOCoverViewController alloc] initWithRootViewController:demoTableViewController scrollView:demoTableViewController.tableView];
+}
+
+- (UIViewController *)demoCoverScrollViewController {
+	
+	UITableViewController *demoTableViewController = [self demoTableViewController];
+	UICollectionViewController *demoCollectionViewController = [self demoCollectionViewController];
+	
+	DEMOCoverScrollViewController *coverScrollViewController = [[DEMOCoverScrollViewController alloc] initWithRootViewController:demoTableViewController scrollView:demoTableViewController.tableView];
+	[coverScrollViewController addChildScrollViewController:demoCollectionViewController scrollView:demoCollectionViewController.collectionView];
+	
+	return coverScrollViewController;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

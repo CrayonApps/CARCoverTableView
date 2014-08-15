@@ -20,10 +20,10 @@
             </objects>
             <point key="canvasLocation" x="131" y="108"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Table View Controller - Table-->
         <scene sceneID="xWm-l0-90s">
             <objects>
-                <tableViewController storyboardIdentifier="DEMOTableView" id="RgU-O6-FB4" customClass="DEMOTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DEMOTableView" title="Table" id="RgU-O6-FB4" customClass="DEMOTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="f0P-5p-s65">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,10 +57,10 @@
             </objects>
             <point key="canvasLocation" x="131" y="861"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Collection View Controller - Collection-->
         <scene sceneID="xca-FE-ZoJ">
             <objects>
-                <collectionViewController storyboardIdentifier="DEMOCollectionView" autoresizesArchivedViewToFullSize="NO" id="tAe-jG-Yp4" customClass="DEMOCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="DEMOCollectionView" autoresizesArchivedViewToFullSize="NO" title="Collection" id="tAe-jG-Yp4" customClass="DEMOCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="MYM-SQ-uBM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -11,6 +11,10 @@
 @interface CARCoverViewController ()
 
 @property (nonatomic, readonly) UIViewController *rootViewController;
+@property (nonatomic, readonly) UIScrollView *rootScrollView;
+
+- (void)initializeCoverView;
+- (void)initializeContentView;
 
 - (void)contentScrollViewDidScroll:(CGPoint)contentOffset;
 
@@ -23,34 +27,47 @@
 @synthesize minimumCoverHeight = _minimumCoverHeight;
 @synthesize maximumCoverHeight = _maximumCoverHeight;
 @synthesize rootViewController = _rootViewController;
+@synthesize rootScrollView = _rootScrollView;
+@synthesize panGestureRecognizer = _panGestureRecognizer;
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView {
 
-	NSAssert(rootViewController, @"rootViewController cannot be nil");
-	NSAssert(scrollView, @"scrollView cannot be nil");
+	if ((rootViewController == nil) || (scrollView == nil)) {
+		[NSException raise:NSInvalidArgumentException format:@"missing arguments"];
+	}
 	
 	self = [super init];
 	if (self) {
 		
-		CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-		_minimumCoverHeight = 44.0f;
-		_maximumCoverHeight = screenHeight * 0.3f;
+		[self initializeCoverViewController];
 		
 		_rootViewController = rootViewController;
-		[self initializeChildScrollViewController:rootViewController scrollView:scrollView];
+		_rootScrollView = scrollView;
+		[self initializeChildScrollViewController:rootViewController];
 	}
 	return self;
+}
+
+- (void)initializeCoverViewController {
+	
+	CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+	_minimumCoverHeight = 64.0f;
+	_maximumCoverHeight = screenHeight * 0.3f;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
-	[self.view addSubview:self.contentView];
-	[self.view addSubview:self.coverView];
+	[self initializeCoverView];
+	[self initializeContentView];
 	
+	[self.view bringSubviewToFront:self.coverView];
+
 	// サブクラスで上書きするとき、_rootViewControllerがnilなら実行されない
-	[self showChildScrollViewController:self.rootViewController];
+	if ((self.rootViewController != nil) && (self.rootScrollView != nil)) {
+		[self showChildScrollViewController:self.rootViewController scrollView:self.rootScrollView];
+	}
 }
 
 #pragma mark - ContainerViewController Methods
@@ -64,27 +81,31 @@
 }
 
 #pragma mark Custom
-- (void)initializeChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView {
+- (void)initializeChildScrollViewController:(UIViewController *)childController {
 
 	[childController removeFromParentViewController];
 	[childController willMoveToParentViewController:self];
 	
 	[self addChildViewController:childController];
 	[childController didMoveToParentViewController:self];
-		
-	UIPanGestureRecognizer *scrollViewPanGestureRecognizer = scrollView.panGestureRecognizer;
-	[scrollView removeGestureRecognizer:scrollViewPanGestureRecognizer];
-	[self.view addGestureRecognizer:scrollViewPanGestureRecognizer];
-		
+}
+
+- (void)showChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView {
+
+	[childController view];
+	
+	// scrollView
+	self.panGestureRecognizer = scrollView.panGestureRecognizer;
+	[scrollView removeGestureRecognizer:self.panGestureRecognizer];
+	[self.view addGestureRecognizer:self.panGestureRecognizer];
+	
 	UIEdgeInsets contentInset = scrollView.contentInset;
 	contentInset.top += self.maximumCoverHeight;	// contentInset.topで複雑な処理をしている場合は考慮していない
 	scrollView.contentInset = contentInset;
 	
 	[scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:NULL];
-}
 
-- (void)showChildScrollViewController:(UIViewController *)childController {
-	
+	// view
 	childController.view.frame = self.contentView.bounds;
 	childController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.contentView addSubview:childController.view];
@@ -92,41 +113,40 @@
 
 #pragma mark - Accessor
 - (void)setMinimumCoverHeight:(CGFloat)minimumCoverHeight {
-// TODO:
+// TODO: 書く
 	[self doesNotRecognizeSelector:_cmd];
 }
 
 - (void)setMaximumCoverHeight:(CGFloat)maximumCoverHeight {
-	// TODO:
+	// TODO: 書く
+	// TODO: scrollView.contentInset.topがこの値を参照しているので差分を調整する必要がある
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-#pragma mark Subviews
-- (UIView *)coverView {
-	if (_coverView == nil) {
-		
-		CGRect frame = self.view.bounds;
-		frame.size.height = self.minimumCoverHeight;
-			
-		_coverView = [[UIView alloc] initWithFrame:frame];
-		_coverView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		_coverView.clipsToBounds = YES;
-	}
-	return _coverView;
+#pragma mark - Subviews
+- (void)initializeCoverView {
+	
+	CGRect frame = self.view.bounds;
+	frame.size.height = self.minimumCoverHeight;
+	
+	_coverView = [[UIView alloc] initWithFrame:frame];
+	_coverView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_coverView.clipsToBounds = YES;
+
+	[self.view addSubview:_coverView];
 }
 
-- (UIView *)contentView {
-	if (_contentView == nil) {
-		
-		CGRect frame = self.view.bounds;
-		frame.origin.y = self.minimumCoverHeight;
-		frame.size.height -= frame.origin.y;
+- (void)initializeContentView {
+	
+	CGRect frame = self.view.bounds;
+	frame.origin.y = self.minimumCoverHeight;
+	frame.size.height -= frame.origin.y;
+	
+	_contentView = [[UIView alloc] initWithFrame:frame];
+	_contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_contentView.clipsToBounds = YES;
 
-		_contentView = [[UIView alloc] initWithFrame:frame];
-		_contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		_contentView.clipsToBounds = YES;
-	}
-	return _contentView;
+	[self.view addSubview:_contentView];
 }
 
 #pragma mark -
@@ -144,7 +164,7 @@
 	CGFloat y = contentOffset.y;
 	
 	CGRect coverFrame = self.coverView.frame;
-		
+			
 	if (y >= 0.0f) {
 		coverFrame.size.height = self.minimumCoverHeight;
 	}
@@ -152,6 +172,8 @@
 		coverFrame.size.height = self.minimumCoverHeight - y;
 	}
 	
+	NSLog(@"%.3f, %@", y, [NSValue valueWithCGRect:coverFrame]);
+
 	self.coverView.frame = coverFrame;
 }
 
