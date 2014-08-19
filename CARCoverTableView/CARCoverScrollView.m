@@ -125,8 +125,14 @@
 	
 	[self setContentOffset:contentOffset animated:animated];
 	
-	// TODO: 必要か？ delegateがちゃんと呼ばれるか？
-	//	_currentIndex = currentIndex;
+	BOOL callDelegate = _currentIndex != currentIndex;
+	_currentIndex = currentIndex;
+	
+	if (callDelegate) {
+		if ([self.delegate respondsToSelector:@selector(scrollView:didUpdateCurrentIndex:)]) {
+			[self.delegate scrollView:self didUpdateCurrentIndex:currentIndex];
+		}
+	}
 }
 
 - (NSInteger)itemCount {
@@ -139,7 +145,15 @@
 
 - (void)setRoughPagingEnabled:(BOOL)roughPagingEnabled {
 	
+	/**
+	 self.roughPagingEnabled = YES で強制的に fitCoverScrollViewPage を呼べるようにしている
+	if (_roughPagingEnabled == roughPagingEnabled) {
+		return;
+	}
+	 */
+	
 	if (roughPagingEnabled) {
+		self.inertialScrolling = YES;
 		[self fitCoverScrollViewPage];
 	}
 	

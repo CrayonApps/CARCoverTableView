@@ -27,3 +27,7 @@
 - (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView;
 
 @end
+
+@interface UIViewController (CARCoverViewController)
+- (CARCoverViewController *)coverViewController;
+@end

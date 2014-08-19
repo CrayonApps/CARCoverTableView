@@ -30,6 +30,15 @@
 @synthesize rootScrollView = _rootScrollView;
 @synthesize panGestureRecognizer = _panGestureRecognizer;
 
+- (id)init {
+	
+	self = [super init];
+	if (self) {
+		[self initializeCoverViewController];
+	}
+	return self;
+}
+
 - (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView {
 
 	if ((rootViewController == nil) || (scrollView == nil)) {
@@ -38,9 +47,7 @@
 	
 	self = [super init];
 	if (self) {
-		
-		[self initializeCoverViewController];
-		
+				
 		_rootViewController = rootViewController;
 		_rootScrollView = scrollView;
 		[self initializeChildScrollViewController:rootViewController];
@@ -175,6 +182,21 @@
 //	NSLog(@"%.3f, %@", y, [NSValue valueWithCGRect:coverFrame]);
 	
 	self.coverView.frame = coverFrame;
+}
+
+@end
+
+@implementation UIViewController (CARCoverViewController)
+
+- (CARCoverViewController *)coverViewController {
+	
+	for (UIViewController *viewController = self.parentViewController; viewController != nil; viewController = viewController.parentViewController) {
+		if ([viewController isKindOfClass:[CARCoverViewController class]]) {
+			return (CARCoverViewController *)viewController;
+		}
+	}
+	
+	return nil;
 }
 
 @end

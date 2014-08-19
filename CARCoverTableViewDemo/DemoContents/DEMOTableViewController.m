@@ -26,6 +26,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Accessor
+- (UIScrollView *)scrollView {
+	return self.tableView;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

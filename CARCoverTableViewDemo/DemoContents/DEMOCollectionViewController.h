@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DEMOCollectionViewController : UICollectionViewController
+#import "CARCoverScrollController.h"
+
+@interface DEMOCollectionViewController : UICollectionViewController <CARScrollViewController>
 
 @end

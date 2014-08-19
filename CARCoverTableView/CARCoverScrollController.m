@@ -10,11 +10,6 @@
 
 @interface CARCoverScrollController ()
 
-@property (nonatomic, readonly) NSMutableArray *childScrollViewControllers;
-@property (nonatomic, readonly) NSMutableArray *childScrollViews;
-
-- (UIScrollView *)scrollViewForViewController:(UIViewController *)viewController;
-
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index;
 - (void)hideChildScrollViewController;
 - (void)fixContentOffset:(UIScrollView *)toScrollView from:(CGPoint)fromOffset;
@@ -24,24 +19,16 @@
 @implementation CARCoverScrollController
 
 @synthesize coverScrollView = _coverScrollView;
-@synthesize childScrollViewControllers = _childScrollViewControllers;
-@synthesize childScrollViews = _childScrollViews;
 @synthesize currentViewController = _currentViewController;
-@dynamic viewControllers;
+@synthesize viewControllers = _viewControllers;
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView {
-	
-	self = [super init];
-	if (self) {
-		
-		[self initializeCoverViewController];
-		
-		if (rootViewController) {
-			NSAssert(scrollView, @"scrollView cannot be nil when rootViewController is not nil");
-			[self insertChildScrollViewController:rootViewController scrollView:scrollView atIndex:0];
-		}
-	}
-	return self;
+	/**
+	 CARCoverScrollController *controller = [[CARCoverScrollController alloc] init];
+	 controller.viewControllers = viewControllers
+	 */
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
 }
 
 - (void)awakeFromNib {
@@ -51,9 +38,6 @@
 
 - (void)initializeCoverViewController {
 	[super initializeCoverViewController];
-	
-	_childScrollViewControllers = [[NSMutableArray alloc] init];
-	_childScrollViews = [[NSMutableArray alloc] init];
 }
 
 - (void)viewDidLoad
@@ -73,7 +57,7 @@
 #pragma mark - Rotation
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-		
+	
 	CGSize contentSize = self.coverScrollView.contentSize;
 	contentSize.width = self.coverScrollView.bounds.size.width * self.viewControllers.count;
 	
@@ -83,8 +67,8 @@
 #pragma mark - ContainerViewController Methods
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index {
 	
-	UIViewController *childViewController = self.childScrollViewControllers[index];
-	UIScrollView *scrollView = self.childScrollViews[index];
+	UIViewController <CARScrollViewController> *childViewController = self.viewControllers[index];
+	UIScrollView *scrollView = childViewController.scrollView;
 
 	[self showChildScrollViewController:childViewController scrollView:scrollView];
 }
@@ -95,8 +79,7 @@
 		return;
 	}
 	
-	UIScrollView *currentScrollView = [self scrollViewForViewController:self.currentViewController];
-	CGPoint contentOffset = currentScrollView.contentOffset;
+	CGPoint contentOffset = self.currentViewController.scrollView.contentOffset;
 	
 	[self hideChildScrollViewController];
 	
@@ -104,7 +87,7 @@
 	
 	[self fixContentOffset:scrollView from:contentOffset];
 	
-	_currentViewController = childController;
+	_currentViewController = (UIViewController <CARScrollViewController> *)childController;
 }
 
 - (void)hideChildScrollViewController {
@@ -113,8 +96,8 @@
 		return;
 	}
 	
-	UIViewController *childViewController = self.currentViewController;
-	UIScrollView *scrollView = [self scrollViewForViewController:childViewController];
+	UIViewController <CARScrollViewController> *childViewController = self.currentViewController;
+	UIScrollView *scrollView = childViewController.scrollView;
 
 	[self.view removeGestureRecognizer:self.panGestureRecognizer];
 	[scrollView addGestureRecognizer:self.panGestureRecognizer];
@@ -142,22 +125,21 @@
 }
 
 #pragma mark - Accessor
-- (NSArray *)viewControllers {
-	return self.childScrollViewControllers.copy;
-}
-
-- (UIScrollView *)scrollViewForViewController:(UIViewController *)viewController {
+- (void)setViewControllers:(NSArray *)viewControllers {
 	
-	if (viewController == nil) {
-		return nil;
+	for (UIViewController <CARScrollViewController> * childViewController in viewControllers) {
+		if ([childViewController conformsToProtocol:@protocol(CARScrollViewController)] == NO) {
+			[NSException raise:NSInvalidArgumentException format:@"childViewController object must conform to protocol CARScrollViewController"];
+		}
+		
+		if ([_viewControllers containsObject:childViewController] == NO) {
+			[self initializeChildScrollViewController:childViewController];
+		}
 	}
 	
-	if ([self.childScrollViewControllers containsObject:viewController] == NO) {
-		[NSException raise:NSInvalidArgumentException format:@""];
-	}
+	_viewControllers = viewControllers.copy;
 	
-	NSInteger index = [self.childScrollViewControllers indexOfObject:viewController];
-	return self.childScrollViews[index];
+	[self.coverScrollView reloadData];
 }
 
 #pragma mark - Subviews
@@ -176,24 +158,9 @@
 	[self.coverView addSubview:_coverScrollView];
 }
 
-#pragma mark - ContainerViewController Methods
-- (void)addChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView {
-	[self insertChildScrollViewController:childController scrollView:scrollView atIndex:self.childScrollViewControllers.count];
-}
-
-- (void)insertChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView atIndex:(NSInteger)index {
-		
-	[self.childScrollViewControllers insertObject:childController atIndex:index];
-	[self.childScrollViews insertObject:scrollView atIndex:index];
-
-	[self initializeChildScrollViewController:childController];
-	
-	[self.coverScrollView reloadData];
-}
-
 #pragma mark - CARCoverScrollViewDataSource
 - (NSInteger)numberOfItemsInScrollView:(CARCoverScrollView *)scrollView {
-	return self.childScrollViewControllers.count;
+	return self.viewControllers.count;
 }
 
 - (UIView *)scrollView:(CARCoverScrollView *)scrollView viewAtIndex:(NSInteger)index {
@@ -213,5 +180,20 @@
 	NSLog(@"CARCoverScrollView did select item at index: %ld", (long)index);
 }
 */
+
+@end
+
+@implementation UIViewController (CARCoverScrollController)
+
+- (CARCoverScrollController *)coverScrollController {
+	
+	for (UIViewController *viewController = self.parentViewController; viewController != nil; viewController = viewController.parentViewController) {
+		if ([viewController isKindOfClass:[CARCoverScrollController class]]) {
+			return (CARCoverScrollController *)viewController;
+		}
+	}
+	
+	return nil;
+}
 
 @end

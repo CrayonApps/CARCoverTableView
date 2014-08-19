@@ -26,6 +26,11 @@
 
 }
 
+#pragma mark - Accessor
+- (UIScrollView *)scrollView {
+	return self.collectionView;
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 	return 3;

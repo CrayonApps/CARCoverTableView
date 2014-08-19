@@ -11,6 +11,11 @@
 #import "CARCoverScrollView.h"
 #import "CARCoverViewController.h"
 
+@protocol CARScrollViewController <NSObject>
+@required
+@property (nonatomic, readonly) UIScrollView *scrollView;
+@end
+
 /**
  @brief CoverTable/CollectionViewではcoverScrollViewで選択する階層に異なるViewControllerを置けなかった問題を解決したクラス
  ナビゲーション構造としてはUITabBarControllerと同じ
@@ -22,14 +27,14 @@
 
 @property (nonatomic, readonly) CARCoverScrollView *coverScrollView;
 
-@property (nonatomic, readonly) NSArray *viewControllers;
-@property (nonatomic, readonly) UIViewController *currentViewController;
-
 /**
- childController.scrollView.panGestureRecognizerの効果範囲をCARCoverScrollViewController.viewに広げるためscrollViewを引数に取っている。
+ viewControllersに入っているインスタンスは UIViewController <CARScrollViewController> * である必要がある
  */
-- (void)addChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView;
+@property (nonatomic, copy) NSArray *viewControllers;
+@property (nonatomic, readonly) UIViewController <CARScrollViewController> *currentViewController;
 
-- (void)insertChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView atIndex:(NSInteger)index;
+@end
 
+@interface UIViewController (CARCoverScrollController)
+- (CARCoverScrollController *)coverScrollController;
 @end

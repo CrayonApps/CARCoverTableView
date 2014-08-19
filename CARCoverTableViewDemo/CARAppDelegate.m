@@ -30,11 +30,11 @@
 	return YES;
 }
 
-- (UITableViewController *)demoTableViewController {
+- (DEMOTableViewController *)demoTableViewController {
 	return [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"DEMOTableView"];
 }
 
-- (UICollectionViewController *)demoCollectionViewController {
+- (DEMOCollectionViewController *)demoCollectionViewController {
 	return [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"DEMOCollectionView"];
 }
 
@@ -46,14 +46,17 @@
 
 - (UIViewController *)demoCoverScrollViewController {
 	
-	UITableViewController *demoTableViewController = [self demoTableViewController];
-	UICollectionViewController *demoCollectionViewController = [self demoCollectionViewController];
-	
-	DEMOCoverScrollViewController *coverScrollViewController = [[DEMOCoverScrollViewController alloc] initWithRootViewController:demoTableViewController scrollView:demoTableViewController.tableView];
-	[coverScrollViewController addChildScrollViewController:demoCollectionViewController scrollView:demoCollectionViewController.collectionView];
+	DEMOTableViewController *demoTableViewController = [self demoTableViewController];
+	DEMOCollectionViewController *demoCollectionViewController = [self demoCollectionViewController];
+	DEMOTableViewController *demoTableViewController2 = [self demoTableViewController];
 
-	UITableViewController *demoTableViewController2 = [self demoTableViewController];
-	[coverScrollViewController addChildScrollViewController:demoTableViewController2 scrollView:demoTableViewController2.tableView];
+	DEMOCoverScrollViewController *coverScrollViewController = [[DEMOCoverScrollViewController alloc] init];
+	
+	coverScrollViewController.viewControllers = @[
+												  demoTableViewController,
+												  demoCollectionViewController,
+												  demoTableViewController2,
+												  ];
 	
 	return coverScrollViewController;
 }
