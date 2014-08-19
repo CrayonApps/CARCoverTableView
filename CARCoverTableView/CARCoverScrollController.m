@@ -70,6 +70,16 @@
 	[self showChildScrollViewControllerAtIndex:self.coverScrollView.currentIndex];
 }
 
+#pragma mark - Rotation
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+		
+	CGSize contentSize = self.coverScrollView.contentSize;
+	contentSize.width = self.coverScrollView.bounds.size.width * self.viewControllers.count;
+	
+	self.coverScrollView.contentSize = contentSize;
+}
+
 #pragma mark - ContainerViewController Methods
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index {
 	
@@ -190,7 +200,7 @@
 
 #pragma mark - CARCoverScrollViewDelegate
 - (void)scrollView:(CARCoverScrollView *)scrollView didUpdateCurrentIndex:(NSInteger)index {
-	NSLog(@"new scrollview index: %ld", (long)index);
+//	NSLog(@"new scrollview index: %ld", (long)index);
 	
 	[self showChildScrollViewControllerAtIndex:index];
 }
