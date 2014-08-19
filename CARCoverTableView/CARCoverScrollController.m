@@ -13,11 +13,11 @@
 @property (nonatomic, readonly) NSMutableArray *childScrollViewControllers;
 @property (nonatomic, readonly) NSMutableArray *childScrollViews;
 
-//- (UIViewController *)childScrollViewControllerAtIndex:(NSInteger)index;
-//- (UIScrollView *)childScrollViewAtIndex:(NSInteger)index;
+- (UIScrollView *)scrollViewForViewController:(UIViewController *)viewController;
 
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index;
 - (void)hideChildScrollViewController;
+- (void)fixContentOffset:(UIScrollView *)toScrollView from:(CGPoint)fromOffset;
 
 @end
 
@@ -73,9 +73,6 @@
 #pragma mark - ContainerViewController Methods
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index {
 	
-//	UIViewController *childViewController = [self childScrollViewControllerAtIndex:index];
-//	UIScrollView *scrollView = [self childScrollViewAtIndex:index];
-
 	UIViewController *childViewController = self.childScrollViewControllers[index];
 	UIScrollView *scrollView = self.childScrollViews[index];
 
@@ -88,9 +85,14 @@
 		return;
 	}
 	
+	UIScrollView *currentScrollView = [self scrollViewForViewController:self.currentViewController];
+	CGPoint contentOffset = currentScrollView.contentOffset;
+	
 	[self hideChildScrollViewController];
 	
 	[super showChildScrollViewController:childController scrollView:scrollView];
+	
+	[self fixContentOffset:scrollView from:contentOffset];
 	
 	_currentViewController = childController;
 }
@@ -101,9 +103,8 @@
 		return;
 	}
 	
-	NSInteger index = [self.childScrollViewControllers indexOfObject:self.currentViewController];
 	UIViewController *childViewController = self.currentViewController;
-	UIScrollView *scrollView = self.childScrollViews[index];
+	UIScrollView *scrollView = [self scrollViewForViewController:childViewController];
 
 	[self.view removeGestureRecognizer:self.panGestureRecognizer];
 	[scrollView addGestureRecognizer:self.panGestureRecognizer];
@@ -116,9 +117,37 @@
 	[childViewController.view removeFromSuperview];
 }
 
+#pragma mark - ScrollView Layout
+- (void)fixContentOffset:(UIScrollView *)toScrollView from:(CGPoint)fromOffset {
+
+	if (toScrollView == nil) {
+		return;
+	}
+	
+	CGFloat y = fromOffset.y;
+	
+	if (y < 0.0f) {
+		toScrollView.contentOffset = fromOffset;
+	}
+}
+
 #pragma mark - Accessor
 - (NSArray *)viewControllers {
 	return self.childScrollViewControllers.copy;
+}
+
+- (UIScrollView *)scrollViewForViewController:(UIViewController *)viewController {
+	
+	if (viewController == nil) {
+		return nil;
+	}
+	
+	if ([self.childScrollViewControllers containsObject:viewController] == NO) {
+		[NSException raise:NSInvalidArgumentException format:@""];
+	}
+	
+	NSInteger index = [self.childScrollViewControllers indexOfObject:viewController];
+	return self.childScrollViews[index];
 }
 
 #pragma mark - Subviews
@@ -148,14 +177,6 @@
 	
 	[self.coverScrollView reloadData];
 }
-
-//- (UIViewController *)childScrollViewControllerAtIndex:(NSInteger)index {
-//	return self.children[index][@"ViewController"];
-//}
-//
-//- (UIScrollView *)childScrollViewAtIndex:(NSInteger)index {
-//	return self.children[index][@"ScrollView"];
-//}
 
 #pragma mark - CARCoverScrollViewDataSource
 - (NSInteger)numberOfItemsInScrollView:(CARCoverScrollView *)scrollView {

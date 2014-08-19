@@ -172,8 +172,8 @@
 		coverFrame.size.height = self.minimumCoverHeight - y;
 	}
 	
-	NSLog(@"%.3f, %@", y, [NSValue valueWithCGRect:coverFrame]);
-
+//	NSLog(@"%.3f, %@", y, [NSValue valueWithCGRect:coverFrame]);
+	
 	self.coverView.frame = coverFrame;
 }
 
