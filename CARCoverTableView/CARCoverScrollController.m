@@ -88,6 +88,10 @@
 	[self fixContentOffset:scrollView from:contentOffset];
 	
 	_currentViewController = (UIViewController <CARScrollViewController> *)childController;
+	
+	if ([self.delegate respondsToSelector:@selector(coverScrollController:didShowViewController:)]) {
+		[self.delegate coverScrollController:self didShowViewController:self.currentViewController];
+	}
 }
 
 - (void)hideChildScrollViewController {
@@ -159,27 +163,22 @@
 }
 
 #pragma mark - CARCoverScrollViewDataSource
-- (NSInteger)numberOfItemsInScrollView:(CARCoverScrollView *)scrollView {
+- (NSInteger)numberOfItemsInCoverScrollView:(CARCoverScrollView *)scrollView {
 	return self.viewControllers.count;
 }
 
-- (UIView *)scrollView:(CARCoverScrollView *)scrollView viewAtIndex:(NSInteger)index {
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
+- (CARCoverScrollViewCell *)coverScrollView:(CARCoverScrollView *)scrollView cellAtIndex:(NSInteger)index {
+
+	UIViewController <CARScrollViewController> *childViewController = self.viewControllers[index];
+	return [childViewController coverScrollView:scrollView cellAtIndex:index];
 }
 
 #pragma mark - CARCoverScrollViewDelegate
-- (void)scrollView:(CARCoverScrollView *)scrollView didUpdateCurrentIndex:(NSInteger)index {
+- (void)coverScrollView:(CARCoverScrollView *)scrollView didUpdateCurrentIndex:(NSInteger)index {
 //	NSLog(@"new scrollview index: %ld", (long)index);
 	
 	[self showChildScrollViewControllerAtIndex:index];
 }
-
-/*
-- (void)scrollView:(CARCoverScrollView *)scrollView didSelectItemAtIndex:(NSInteger)index {
-	NSLog(@"CARCoverScrollView did select item at index: %ld", (long)index);
-}
-*/
 
 @end
 

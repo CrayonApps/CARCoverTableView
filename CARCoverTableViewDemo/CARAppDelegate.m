@@ -9,7 +9,6 @@
 #import "CARAppDelegate.h"
 
 #import "DEMOCoverViewController.h"
-#import "DEMOCoverScrollViewController.h"
 
 #import "DEMOTableViewController.h"
 #import "DEMOCollectionViewController.h"
@@ -50,7 +49,7 @@
 	DEMOCollectionViewController *demoCollectionViewController = [self demoCollectionViewController];
 	DEMOTableViewController *demoTableViewController2 = [self demoTableViewController];
 
-	DEMOCoverScrollViewController *coverScrollViewController = [[DEMOCoverScrollViewController alloc] init];
+	CARCoverScrollController *coverScrollViewController = [[CARCoverScrollController alloc] init];
 	
 	coverScrollViewController.viewControllers = @[
 												  demoTableViewController,

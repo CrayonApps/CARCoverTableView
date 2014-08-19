@@ -17,8 +17,8 @@
 @interface CARCoverScrollView ()
 
 // 変更が一カ所のみのプロパティをreadonlyにしてみるテスト
-@property (nonatomic, readonly) NSMutableArray *reusableViews;
-@property (nonatomic, readonly) NSMutableDictionary *allViews;
+@property (nonatomic, readonly) NSMutableDictionary *reusableCells;
+@property (nonatomic, readonly) NSMutableDictionary *allCells;
 @property (nonatomic, weak) NSArray *defaultSubviews;
 
 @property (nonatomic, readonly) NSIndexSet *previousVisibleIndices;
@@ -35,11 +35,12 @@
 
 - (void)enqueueAllViews;
 - (void)enqueueReuseableViewAtIndex:(NSInteger)index;
+- (void)enqueueReusableCell:(CARCoverScrollViewCell *)cell;
 
 - (void)getDatas;
 - (void)prepareViews;
 
-- (void)initializeView:(UIView *)view;
+- (void)initializeView:(CARCoverScrollViewCell *)view;
 - (void)viewDidSelect:(CARCoverScrollViewSelectionRecognizer *)gestureRecognizer;
 
 - (void)updateCurrentIndex;
@@ -57,8 +58,8 @@
 
 @synthesize delegate = _coverScrollViewDelegate;
 @synthesize currentIndex = _currentIndex;
-@synthesize reusableViews = _reusableViews;
-@synthesize allViews = _allViews;
+@synthesize reusableCells = _reusableCells;
+@synthesize allCells = _allCells;
 @synthesize previousVisibleIndices = _previousVisibleIndices;
 @synthesize itemCount = _itemCount;
 @synthesize previousLayoutDate = _previousLayoutDate;
@@ -86,8 +87,8 @@
 - (void)initializeCoverScrollView {
 	
 	_itemCount = NSNotFound;
-	_reusableViews = [[NSMutableArray alloc] init];
-	_allViews = [[NSMutableDictionary alloc] init];
+	_reusableCells = [[NSMutableDictionary alloc] init];
+	_allCells = [[NSMutableDictionary alloc] init];
 	self.defaultSubviews = self.subviews.copy;
 	
 	self.scrollsToTop = NO;
@@ -129,8 +130,8 @@
 	_currentIndex = currentIndex;
 	
 	if (callDelegate) {
-		if ([self.delegate respondsToSelector:@selector(scrollView:didUpdateCurrentIndex:)]) {
-			[self.delegate scrollView:self didUpdateCurrentIndex:currentIndex];
+		if ([self.delegate respondsToSelector:@selector(coverScrollView:didUpdateCurrentIndex:)]) {
+			[self.delegate coverScrollView:self didUpdateCurrentIndex:currentIndex];
 		}
 	}
 }
@@ -198,33 +199,45 @@
 }
 
 #pragma mark - Reusable Views
-- (id)dequeReusableView {
-	
-	UIView *view = self.reusableViews.lastObject;
-	[self.reusableViews removeLastObject];
+- (id)dequeReusableCellWithIdentifier:(NSString *)identifier {
+
+	NSMutableArray *viewArray = self.reusableCells[identifier];
+	CARCoverScrollViewCell *view = viewArray.lastObject;
+	[viewArray removeLastObject];
 	
 	return view;
 }
 
 - (void)enqueueAllViews {
 	
-	NSArray *views = [self.allViews allValues];
+	NSArray *cellArray = [self.allCells allValues];
 		
-	[self.reusableViews addObjectsFromArray:views];
-	[self.allViews removeAllObjects];
+	for (CARCoverScrollViewCell *cell in cellArray) {
+		[self enqueueReusableCell:cell];
+	}
+	[self.allCells removeAllObjects];
 }
 
 - (void)enqueueReuseableViewAtIndex:(NSInteger)index {
 	
-	UIView *view = self.allViews[@(index)];
+	CARCoverScrollViewCell *cell = self.allCells[@(index)];
 	
-	if (view == nil) {
+	if (cell == nil) {
 		return;
 	}
-		
-	[view removeFromSuperview];
-	[self.allViews removeObjectForKey:@(index)];
-	[self.reusableViews addObject:view];
+	
+	[self.allCells removeObjectForKey:@(index)];
+	[self enqueueReusableCell:cell];
+}
+
+- (void)enqueueReusableCell:(CARCoverScrollViewCell *)cell {
+	
+	[cell removeFromSuperview];
+	
+	if (self.reusableCells[cell.reuseIdentifier] == nil) {
+		self.reusableCells[cell.reuseIdentifier] = [[NSMutableArray alloc] init];
+	}
+	[self.reusableCells[cell.reuseIdentifier] addObject:cell];
 }
 
 #pragma mark - Reload
@@ -237,8 +250,8 @@
 }
 
 - (void)reloadItemCount {
-	NSAssert([self.dataSource respondsToSelector:@selector(numberOfItemsInScrollView:)], @"");
-	_itemCount = [self.dataSource numberOfItemsInScrollView:self];
+	NSAssert([self.dataSource respondsToSelector:@selector(numberOfItemsInCoverScrollView:)], @"");
+	_itemCount = [self.dataSource numberOfItemsInCoverScrollView:self];
 }
 
 - (void)getDatas {
@@ -270,8 +283,8 @@
 	if (newIndex != self.currentIndex) {
 		_currentIndex = newIndex;	// self.setCurrentIndexを呼ぶとcontentOffsetがアップデートされるので
 		
-		if ([self.delegate respondsToSelector:@selector(scrollView:didUpdateCurrentIndex:)]) {
-			[self.delegate scrollView:self didUpdateCurrentIndex:newIndex];
+		if ([self.delegate respondsToSelector:@selector(coverScrollView:didUpdateCurrentIndex:)]) {
+			[self.delegate coverScrollView:self didUpdateCurrentIndex:newIndex];
 		}
 	}
 }
@@ -357,20 +370,22 @@
 	
 	[addViewIndices enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
 		
-		NSAssert([self.dataSource respondsToSelector:@selector(scrollView:viewAtIndex:)], @"");
+		NSAssert([self.dataSource respondsToSelector:@selector(coverScrollView:cellAtIndex:)], @"");
 		
-		UIView *view = [self.dataSource scrollView:self viewAtIndex:idx];
-		NSAssert(view, @"");
-		[self initializeView:view];
+		CARCoverScrollViewCell *cell = [self.dataSource coverScrollView:self cellAtIndex:idx];
+		NSAssert(cell, @"");
+		NSAssert(cell.reuseIdentifier, @"");
+		
+		[self initializeView:cell];
 		
 		CGRect frame = self.frame;
 		frame.origin.y = 0.0f;
 		frame.origin.x = boundsWidth * idx;
 		
-		view.frame = frame;
-		[self addSubview:view];
+		cell.frame = frame;
+		[self addSubview:cell];
 
-		self.allViews[@(idx)] = view;
+		self.allCells[@(idx)] = cell;
 	}];
 	
 	for (UIView *view in self.defaultSubviews) {
@@ -406,12 +421,12 @@
 #pragma mark - View Selection
 - (void)viewDidSelect:(CARCoverScrollViewSelectionRecognizer *)gestureRecognizer {
 	
-	if ([self.delegate respondsToSelector:@selector(scrollView:didSelectItemAtIndex:)]) {
+	if ([self.delegate respondsToSelector:@selector(coverScrollView:didSelectItemAtIndex:)]) {
 		UIView *view = gestureRecognizer.view;
-		NSNumber *key = [_allViews allKeysForObject:view][0];
+		NSNumber *key = [_allCells allKeysForObject:view][0];
 		NSInteger index = key.integerValue;
 		
-		[self.delegate scrollView:self didSelectItemAtIndex:index];
+		[self.delegate coverScrollView:self didSelectItemAtIndex:index];
 	}
 }
 
@@ -494,6 +509,9 @@
 	[self setContentOffset:contentOffset animated:YES];
 }
 
+@end
+
+@implementation CARCoverScrollViewCell
 @end
 
 @implementation CARCoverScrollViewSelectionRecognizer

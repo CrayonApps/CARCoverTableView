@@ -8,6 +8,8 @@
 
 #import "DEMOTableViewController.h"
 
+#import "DEMOCoverImageCell.h"
+
 @interface DEMOTableViewController ()
 
 @end
@@ -26,9 +28,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Accessor
+#pragma mark - CARScrollViewController
 - (UIScrollView *)scrollView {
 	return self.tableView;
+}
+
+- (CARCoverScrollViewCell *)coverScrollView:(CARCoverScrollView *)coverScrollView cellAtIndex:(NSInteger)index {
+	
+	NSString *identifier = @"DEMOCoverImageCell";
+	DEMOCoverImageCell *cell = [coverScrollView dequeReusableCellWithIdentifier:identifier];
+	if (cell == nil) {
+		cell = [DEMOCoverImageCell coverImageCell];
+	}
+	
+	cell.titleLabel.text = [NSString stringWithFormat:@"Table%02d", index];
+	cell.imageView.image = [UIImage imageNamed:@"image001"];
+	
+	return cell;
 }
 
 #pragma mark - Table view data source

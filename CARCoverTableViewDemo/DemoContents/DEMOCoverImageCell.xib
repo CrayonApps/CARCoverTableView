@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="YJL-Wg-a2V" customClass="DEMOCoverImageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uLo-yu-pQN">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yge-9r-fFs">
+                    <rect key="frame" x="288" y="287" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="5W1-Tl-qh7"/>
+                        <constraint firstAttribute="width" constant="22" id="iDf-Lk-Dpf"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jqd-Sa-lex">
+                    <rect key="frame" x="40" y="276" width="240" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="zaW-s8-Myx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.066666666669999999" green="0.066666666669999999" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQf-gr-FfK">
+                    <rect key="frame" x="10" y="287" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="2lr-R8-cXB"/>
+                        <constraint firstAttribute="height" constant="22" id="Wp6-AR-7yf"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="uLo-yu-pQN" firstAttribute="top" secondItem="YJL-Wg-a2V" secondAttribute="top" id="E2m-Mp-IYb"/>
+                <constraint firstAttribute="bottom" secondItem="uLo-yu-pQN" secondAttribute="bottom" id="GbL-mE-38z"/>
+                <constraint firstAttribute="bottom" secondItem="Jqd-Sa-lex" secondAttribute="bottom" id="IBu-9T-hmR"/>
+                <constraint firstItem="uLo-yu-pQN" firstAttribute="leading" secondItem="YJL-Wg-a2V" secondAttribute="leading" id="KSn-5s-yP7"/>
+                <constraint firstItem="Jqd-Sa-lex" firstAttribute="leading" secondItem="YJL-Wg-a2V" secondAttribute="leading" constant="40" id="Mcf-cO-YRZ"/>
+                <constraint firstItem="IQf-gr-FfK" firstAttribute="leading" secondItem="YJL-Wg-a2V" secondAttribute="leading" constant="10" id="NnL-JP-MLM"/>
+                <constraint firstItem="Yge-9r-fFs" firstAttribute="centerY" secondItem="Jqd-Sa-lex" secondAttribute="centerY" id="Rmx-bD-6tA"/>
+                <constraint firstAttribute="trailing" secondItem="uLo-yu-pQN" secondAttribute="trailing" id="Srb-Qx-ofB"/>
+                <constraint firstAttribute="trailing" secondItem="Jqd-Sa-lex" secondAttribute="trailing" constant="40" id="kUV-IK-OHy"/>
+                <constraint firstItem="IQf-gr-FfK" firstAttribute="centerY" secondItem="Jqd-Sa-lex" secondAttribute="centerY" id="naf-lv-rSR"/>
+                <constraint firstAttribute="trailing" secondItem="Yge-9r-fFs" secondAttribute="trailing" constant="10" id="xP0-fM-Bmj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="string" keyPath="reuseIdentifier" value="DEMOCoverImageCell"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="imageView" destination="uLo-yu-pQN" id="hKL-Uy-dgZ"/>
+                <outlet property="leftButton" destination="IQf-gr-FfK" id="kHP-dE-IMr"/>
+                <outlet property="rightButton" destination="Yge-9r-fFs" id="TIf-BJ-25D"/>
+                <outlet property="titleLabel" destination="Jqd-Sa-lex" id="cbi-3J-Jxm"/>
+            </connections>
+        </view>
+    </objects>
+</document>

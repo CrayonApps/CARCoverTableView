@@ -8,6 +8,8 @@
 
 #import "DEMOCollectionViewController.h"
 
+#import "DEMOCoverLabelCell.h"
+
 @interface DEMOCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *textLabel;
@@ -26,9 +28,26 @@
 
 }
 
-#pragma mark - Accessor
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - CARScrollViewController
 - (UIScrollView *)scrollView {
 	return self.collectionView;
+}
+
+- (CARCoverScrollViewCell *)coverScrollView:(CARCoverScrollView *)coverScrollView cellAtIndex:(NSInteger)index {
+	
+	NSString *identifier = @"DEMOCoverLabelCell";
+	DEMOCoverLabelCell *cell = [coverScrollView dequeReusableCellWithIdentifier:identifier];
+	if (cell == nil) {
+		cell = [DEMOCoverLabelCell coverLabelCell];
+	}
+	
+	cell.titleLabel.text = @"CollectionView";
+	
+	return cell;
 }
 
 #pragma mark - UICollectionViewDataSource

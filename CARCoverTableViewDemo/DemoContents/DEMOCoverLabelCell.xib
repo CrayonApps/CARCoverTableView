@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="4EA-Gp-Joi" customClass="DEMOCoverLabelCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="exH-Bq-7WS">
+                    <rect key="frame" x="42" y="20" width="236" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdP-ft-oNd">
+                    <rect key="frame" x="288" y="287" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="Gb3-X4-gt2"/>
+                        <constraint firstAttribute="height" constant="22" id="HBr-dV-Lzl"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-RM-vlE">
+                    <rect key="frame" x="10" y="287" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="FDN-7V-xYg"/>
+                        <constraint firstAttribute="width" constant="22" id="s4Q-U4-MjH"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.86274509799999999" green="0.039215686270000001" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="VdP-ft-oNd" secondAttribute="bottom" constant="11" id="5Ld-Tk-n9i"/>
+                <constraint firstAttribute="trailing" secondItem="exH-Bq-7WS" secondAttribute="trailing" constant="42" id="Bma-SU-AsH"/>
+                <constraint firstAttribute="trailing" secondItem="VdP-ft-oNd" secondAttribute="trailing" constant="10" id="SON-gm-uMy"/>
+                <constraint firstItem="exH-Bq-7WS" firstAttribute="leading" secondItem="4EA-Gp-Joi" secondAttribute="leading" constant="42" id="TqW-S6-nB7"/>
+                <constraint firstItem="exH-Bq-7WS" firstAttribute="top" secondItem="4EA-Gp-Joi" secondAttribute="top" constant="20" id="UIb-bZ-ba0"/>
+                <constraint firstItem="XaW-RM-vlE" firstAttribute="leading" secondItem="4EA-Gp-Joi" secondAttribute="leading" constant="10" id="bbh-ce-Ugy"/>
+                <constraint firstAttribute="bottom" secondItem="XaW-RM-vlE" secondAttribute="bottom" constant="11" id="j4U-L6-01A"/>
+                <constraint firstAttribute="bottom" secondItem="exH-Bq-7WS" secondAttribute="bottom" id="vME-MX-76q"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="string" keyPath="reuseIdentifier" value="DEMOCoverLabelCell"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="leftButton" destination="XaW-RM-vlE" id="5Me-pM-1uE"/>
+                <outlet property="rightButton" destination="VdP-ft-oNd" id="GOC-lq-exF"/>
+                <outlet property="titleLabel" destination="exH-Bq-7WS" id="gox-4c-3df"/>
+            </connections>
+        </view>
+    </objects>
+</document>

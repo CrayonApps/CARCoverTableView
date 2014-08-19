@@ -17,20 +17,27 @@
  */
 
 @class CARCoverScrollView;
+@class CARCoverScrollViewCell;
 
 @protocol CARCoverScrollViewDataSource <NSObject>
 
 @required
-- (NSInteger)numberOfItemsInScrollView:(CARCoverScrollView *)scrollView;
-- (UIView *)scrollView:(CARCoverScrollView *)scrollView viewAtIndex:(NSInteger)index;
+- (NSInteger)numberOfItemsInCoverScrollView:(CARCoverScrollView *)coverScrollView;
+- (CARCoverScrollViewCell *)coverScrollView:(CARCoverScrollView *)coverScrollView cellAtIndex:(NSInteger)index;
 
 @end
 
 @protocol CARCoverScrollViewDelegate <NSObject, UIScrollViewDelegate>
 
 @optional
-- (void)scrollView:(CARCoverScrollView *)scrollView didSelectItemAtIndex:(NSInteger)index;
-- (void)scrollView:(CARCoverScrollView *)scrollView didUpdateCurrentIndex:(NSInteger)index;
+- (void)coverScrollView:(CARCoverScrollView *)coverScrollView didSelectItemAtIndex:(NSInteger)index;
+- (void)coverScrollView:(CARCoverScrollView *)coverScrollView didUpdateCurrentIndex:(NSInteger)index;
+
+@end
+
+@interface CARCoverScrollViewCell : UIView
+
+@property (nonatomic, copy) NSString *reuseIdentifier;
 
 @end
 
@@ -55,6 +62,6 @@
 
 - (void)reloadData;
 
-- (id)dequeReusableView;
+- (id)dequeReusableCellWithIdentifier:(NSString *)identifier;
 
 @end
