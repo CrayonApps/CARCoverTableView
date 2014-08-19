@@ -59,7 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+	
 	[self initializeCoverScrollView];
 }
 
@@ -169,6 +169,9 @@
 	_coverScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_coverScrollView.dataSource = self;
 	_coverScrollView.delegate = self;
+	
+	_coverScrollView.backgroundColor = [UIColor whiteColor];
+	_coverScrollView.roughPagingEnabled = YES;
 
 	[self.coverView addSubview:_coverScrollView];
 }

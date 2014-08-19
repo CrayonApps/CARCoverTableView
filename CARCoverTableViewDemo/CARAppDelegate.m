@@ -51,6 +51,9 @@
 	
 	DEMOCoverScrollViewController *coverScrollViewController = [[DEMOCoverScrollViewController alloc] initWithRootViewController:demoTableViewController scrollView:demoTableViewController.tableView];
 	[coverScrollViewController addChildScrollViewController:demoCollectionViewController scrollView:demoCollectionViewController.collectionView];
+
+	UITableViewController *demoTableViewController2 = [self demoTableViewController];
+	[coverScrollViewController addChildScrollViewController:demoTableViewController2 scrollView:demoTableViewController2.tableView];
 	
 	return coverScrollViewController;
 }
