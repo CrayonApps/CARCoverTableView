@@ -44,6 +44,8 @@
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, readonly) UIViewController <CARScrollViewController> *currentViewController;
 
+- (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView __attribute__ ((deprecated("use init and setViewControllers instead")));
+
 @end
 
 @interface UIViewController (CARCoverScrollController)
