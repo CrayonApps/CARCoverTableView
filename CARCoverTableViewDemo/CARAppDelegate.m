@@ -9,6 +9,7 @@
 #import "CARAppDelegate.h"
 
 #import "DEMOCoverViewController.h"
+#import "DEMOCoverScrollController.h"
 
 #import "DEMOTableViewController.h"
 #import "DEMOCollectionViewController.h"
@@ -39,8 +40,11 @@
 
 - (UIViewController *)demoCoverViewController {
 	
-	UITableViewController *demoTableViewController = [self demoTableViewController];
-	return [[DEMOCoverViewController alloc] initWithRootViewController:demoTableViewController scrollView:demoTableViewController.tableView];
+	DEMOTableViewController *demoTableViewController = [self demoTableViewController];
+	DEMOCoverViewController *coverViewController = [[DEMOCoverViewController alloc] init];
+	coverViewController.rootViewController = demoTableViewController;
+	
+	return coverViewController;
 }
 
 - (UIViewController *)demoCoverScrollViewController {
@@ -49,7 +53,8 @@
 	DEMOCollectionViewController *demoCollectionViewController = [self demoCollectionViewController];
 	DEMOTableViewController *demoTableViewController2 = [self demoTableViewController];
 
-	CARCoverScrollController *coverScrollViewController = [[CARCoverScrollController alloc] init];
+//	CARCoverScrollController *coverScrollViewController = [[CARCoverScrollController alloc] init];
+	DEMOCoverScrollController *coverScrollViewController = [[DEMOCoverScrollController alloc] init];
 	
 	coverScrollViewController.viewControllers = @[
 												  demoTableViewController,

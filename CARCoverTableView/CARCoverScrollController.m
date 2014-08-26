@@ -19,8 +19,8 @@
 @implementation CARCoverScrollController
 
 @synthesize coverScrollView = _coverScrollView;
-@synthesize currentViewController = _currentViewController;
 @synthesize viewControllers = _viewControllers;
+@synthesize currentViewController = _currentViewController;
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView {
 	/**
@@ -68,27 +68,31 @@
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index {
 	
 	UIViewController <CARScrollViewController> *childViewController = self.viewControllers[index];
-	UIScrollView *scrollView = childViewController.scrollView;
-
-	[self showChildScrollViewController:childViewController scrollView:scrollView];
+	[self showChildScrollViewController:childViewController];
 }
 
-- (void)showChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView {
+- (void)showChildScrollViewController:(UIViewController<CARScrollViewController> *)childController {
 	
 	if (childController == self.currentViewController) {
 		return;
 	}
 	
+	if ([self.viewControllers containsObject:childController] == NO) {
+		// TODO: なにか投げたい
+		NSAssert(NO, @"hoge");
+		return;
+	}
+
 	CGPoint contentOffset = self.currentViewController.scrollView.contentOffset;
 	
 	[self hideChildScrollViewController];
 	
-	[super showChildScrollViewController:childController scrollView:scrollView];
+	[super showChildScrollViewController:childController];
 	
-	[self fixContentOffset:scrollView from:contentOffset];
+	_currentViewController = childController;
 	
-	_currentViewController = (UIViewController <CARScrollViewController> *)childController;
-	
+	[self fixContentOffset:childController.scrollView from:contentOffset];
+		
 	if ([self.delegate respondsToSelector:@selector(coverScrollController:didShowViewController:)]) {
 		[self.delegate coverScrollController:self didShowViewController:self.currentViewController];
 	}
@@ -129,6 +133,18 @@
 }
 
 #pragma mark - Accessor
+- (void)setRootViewController:(UIViewController<CARScrollViewController> *)rootViewController {
+	self.currentViewController = rootViewController;
+}
+
+- (UIViewController <CARScrollViewController> *)rootViewController {
+	return self.currentViewController;
+}
+
+- (void)setCurrentViewController:(UIViewController<CARScrollViewController> *)currentViewController {
+	[self showChildScrollViewController:currentViewController];
+}
+
 - (void)setViewControllers:(NSArray *)viewControllers {
 	
 	for (UIViewController <CARScrollViewController> * childViewController in viewControllers) {
@@ -168,9 +184,9 @@
 }
 
 - (CARCoverScrollViewCell *)coverScrollView:(CARCoverScrollView *)scrollView cellAtIndex:(NSInteger)index {
-
-	UIViewController <CARScrollViewController> *childViewController = self.viewControllers[index];
-	return [childViewController coverScrollView:scrollView cellAtIndex:index];
+	// CoverScrollViewCellを設定するためにCARCoverScrollControllerはサブクラス化して使用する必要がある
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
 }
 
 #pragma mark - CARCoverScrollViewDelegate

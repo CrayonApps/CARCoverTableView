@@ -7,24 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "CARCoverViewControllerProtected.h"
+#import "CARCoverViewControllerProtocols.h"
 
 /**
  現状storyboardからは作成できない
  */
 @interface CARCoverViewController : UIViewController <CARCoverViewControllerProtected>
 
+@property (nonatomic, strong) UIViewController <CARScrollViewController> *rootViewController;
+
 @property (nonatomic, readonly) UIView *coverView;
 @property (nonatomic, readonly) UIView *contentView;
 
 @property (nonatomic, assign) CGFloat minimumCoverHeight;
 @property (nonatomic, assign) CGFloat maximumCoverHeight;
-
-/**
- TODO: 引数に渡す時点でscrollViewがnilだと現状動かないので注意
- */
-- (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView;
 
 @end
 

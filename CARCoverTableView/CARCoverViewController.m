@@ -10,9 +10,6 @@
 
 @interface CARCoverViewController ()
 
-@property (nonatomic, readonly) UIViewController *rootViewController;
-@property (nonatomic, readonly) UIScrollView *rootScrollView;
-
 - (void)initializeCoverView;
 - (void)initializeContentView;
 
@@ -27,7 +24,6 @@
 @synthesize minimumCoverHeight = _minimumCoverHeight;
 @synthesize maximumCoverHeight = _maximumCoverHeight;
 @synthesize rootViewController = _rootViewController;
-@synthesize rootScrollView = _rootScrollView;
 @synthesize panGestureRecognizer = _panGestureRecognizer;
 
 - (id)init {
@@ -39,20 +35,9 @@
 	return self;
 }
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView {
-
-	if ((rootViewController == nil) || (scrollView == nil)) {
-		[NSException raise:NSInvalidArgumentException format:@"missing arguments"];
-	}
-	
-	self = [super init];
-	if (self) {
-				
-		_rootViewController = rootViewController;
-		_rootScrollView = scrollView;
-		[self initializeChildScrollViewController:rootViewController];
-	}
-	return self;
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	[self initializeCoverViewController];
 }
 
 - (void)initializeCoverViewController {
@@ -70,11 +55,6 @@
 	[self initializeContentView];
 	
 	[self.view bringSubviewToFront:self.coverView];
-
-	// サブクラスで上書きするとき、_rootViewControllerがnilなら実行されない
-	if ((self.rootViewController != nil) && (self.rootScrollView != nil)) {
-		[self showChildScrollViewController:self.rootViewController scrollView:self.rootScrollView];
-	}
 }
 
 #pragma mark - ContainerViewController Methods
@@ -88,7 +68,7 @@
 }
 
 #pragma mark Custom
-- (void)initializeChildScrollViewController:(UIViewController *)childController {
+- (void)initializeChildScrollViewController:(UIViewController <CARScrollViewController> *)childController {
 
 	[childController removeFromParentViewController];
 	[childController willMoveToParentViewController:self];
@@ -97,9 +77,12 @@
 	[childController didMoveToParentViewController:self];
 }
 
-- (void)showChildScrollViewController:(UIViewController *)childController scrollView:(UIScrollView *)scrollView {
+- (void)showChildScrollViewController:(UIViewController <CARScrollViewController> *)childController {
 
+	[self view];
 	[childController view];
+	
+	UIScrollView *scrollView = childController.scrollView;
 	
 	// scrollView
 	self.panGestureRecognizer = scrollView.panGestureRecognizer;
@@ -119,9 +102,23 @@
 }
 
 #pragma mark - Accessor
+- (void)setRootViewController:(UIViewController<CARScrollViewController> *)rootViewController {
+	
+	if (rootViewController == _rootViewController) {
+		return;
+	}
+	
+	[self view];
+	
+	_rootViewController = rootViewController;
+	[self initializeChildScrollViewController:rootViewController];
+	[self showChildScrollViewController:rootViewController];
+}
+
 - (void)setMinimumCoverHeight:(CGFloat)minimumCoverHeight {
-// TODO: 書く
+	// TODO: 書く
 	[self doesNotRecognizeSelector:_cmd];
+//	[self contentScrollViewDidScroll:self.curr];
 }
 
 - (void)setMaximumCoverHeight:(CGFloat)maximumCoverHeight {

@@ -11,14 +11,6 @@
 #import "CARCoverScrollView.h"
 #import "CARCoverViewController.h"
 
-@protocol CARScrollViewController <NSObject>
-
-@required
-@property (nonatomic, readonly) UIScrollView *scrollView;
-- (CARCoverScrollViewCell *)coverScrollView:(CARCoverScrollView *)coverScrollView cellAtIndex:(NSInteger)index;	// これだと個々のviewControllerに実装しないといけないので、統一していい場合にそうできるオプションを用意したい
-
-@end
-
 @class CARCoverScrollController;
 
 @protocol CARCoverScrollControllerDelegate <NSObject>
@@ -31,6 +23,8 @@
 /**
  @brief CoverTable/CollectionViewではcoverScrollViewで選択する階層に異なるViewControllerを置けなかった問題を解決したクラス
  ナビゲーション構造としてはUITabBarControllerと同じ
+ 
+ CoverScrollViewCellを設定するためにCARCoverScrollControllerはサブクラス化して使用する必要がある
  */
 @interface CARCoverScrollController : CARCoverViewController <CARCoverScrollViewDataSource, CARCoverScrollViewDelegate>
 
@@ -42,9 +36,12 @@
  viewControllersに入っているインスタンスは UIViewController <CARScrollViewController> * である必要がある
  */
 @property (nonatomic, copy) NSArray *viewControllers;
-@property (nonatomic, readonly) UIViewController <CARScrollViewController> *currentViewController;
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView __attribute__ ((deprecated("use init and setViewControllers instead")));
+/** CARCoverViewController.rootViewControllerはここに転送される
+ */
+@property (nonatomic, strong) UIViewController <CARScrollViewController> *currentViewController;
+
+//- (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView __attribute__ ((deprecated("use init and setViewControllers instead")));
 
 @end
 
