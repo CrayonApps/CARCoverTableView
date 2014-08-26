@@ -24,5 +24,6 @@
 
 - (void)initializeChildScrollViewController:(UIViewController <CARScrollViewController> *)childController;
 - (void)showChildScrollViewController:(UIViewController <CARScrollViewController> *)childController;
+- (void)hideChildScrollViewController;
 
 @end

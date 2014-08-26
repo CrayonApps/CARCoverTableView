@@ -11,7 +11,6 @@
 @interface CARCoverScrollController ()
 
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index;
-- (void)hideChildScrollViewController;
 - (void)fixContentOffset:(UIScrollView *)toScrollView from:(CGPoint)fromOffset;
 
 @end
@@ -96,26 +95,6 @@
 	if ([self.delegate respondsToSelector:@selector(coverScrollController:didShowViewController:)]) {
 		[self.delegate coverScrollController:self didShowViewController:self.currentViewController];
 	}
-}
-
-- (void)hideChildScrollViewController {
-
-	if (self.currentViewController == nil) {
-		return;
-	}
-	
-	UIViewController <CARScrollViewController> *childViewController = self.currentViewController;
-	UIScrollView *scrollView = childViewController.scrollView;
-
-	[self.view removeGestureRecognizer:self.panGestureRecognizer];
-	[scrollView addGestureRecognizer:self.panGestureRecognizer];
-
-	// TODO:
-	UIEdgeInsets contentInset = scrollView.contentInset;
-	contentInset.top -= self.maximumCoverHeight;
-	scrollView.contentInset = contentInset;
-	
-	[childViewController.view removeFromSuperview];
 }
 
 #pragma mark - ScrollView Layout

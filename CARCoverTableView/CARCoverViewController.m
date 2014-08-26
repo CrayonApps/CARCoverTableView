@@ -101,6 +101,26 @@
 	[self.contentView addSubview:childController.view];
 }
 
+- (void)hideChildScrollViewController {
+	
+	if (self.rootViewController == nil) {
+		return;
+	}
+	
+	UIViewController <CARScrollViewController> *childViewController = self.rootViewController;
+	UIScrollView *scrollView = childViewController.scrollView;
+	
+	[self.view removeGestureRecognizer:self.panGestureRecognizer];
+	[scrollView addGestureRecognizer:self.panGestureRecognizer];
+	
+	// contentInset.topで複雑な処理をしている場合は考慮していない
+	UIEdgeInsets contentInset = scrollView.contentInset;
+	contentInset.top -= self.maximumCoverHeight;
+	scrollView.contentInset = contentInset;
+	
+	[childViewController.view removeFromSuperview];
+}
+
 #pragma mark - Accessor
 - (void)setRootViewController:(UIViewController<CARScrollViewController> *)rootViewController {
 	
@@ -109,8 +129,11 @@
 	}
 	
 	[self view];
+
+	[self hideChildScrollViewController];
 	
 	_rootViewController = rootViewController;
+
 	[self initializeChildScrollViewController:rootViewController];
 	[self showChildScrollViewController:rootViewController];
 }
