@@ -110,12 +110,13 @@
 	UIViewController <CARScrollViewController> *childViewController = self.rootViewController;
 	UIScrollView *scrollView = childViewController.scrollView;
 	
+	[scrollView removeObserver:self forKeyPath:@"contentOffset" context:NULL];
+	
 	[self.view removeGestureRecognizer:self.panGestureRecognizer];
 	[scrollView addGestureRecognizer:self.panGestureRecognizer];
 	
-	// contentInset.topで複雑な処理をしている場合は考慮していない
 	UIEdgeInsets contentInset = scrollView.contentInset;
-	contentInset.top -= self.maximumCoverHeight;
+	contentInset.top -= self.maximumCoverHeight;	// contentInset.topで複雑な処理をしている場合は考慮していない
 	scrollView.contentInset = contentInset;
 	
 	[childViewController.view removeFromSuperview];
