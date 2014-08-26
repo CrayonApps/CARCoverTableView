@@ -149,9 +149,15 @@
 }
 
 - (void)setMaximumCoverHeight:(CGFloat)maximumCoverHeight {
-	// TODO: 書く
-	// TODO: scrollView.contentInset.topがこの値を参照しているので差分を調整する必要がある
-	[self doesNotRecognizeSelector:_cmd];
+	
+	UIScrollView *scrollView = self.rootViewController.scrollView;
+	UIEdgeInsets contentInset = scrollView.contentInset;
+	
+	contentInset.top -= self.maximumCoverHeight;
+	contentInset.top += maximumCoverHeight;
+	
+	scrollView.contentInset = contentInset;
+	_maximumCoverHeight = maximumCoverHeight;
 }
 
 #pragma mark - Subviews

@@ -64,7 +64,7 @@
 			
 		case 1: {	// maximum cover height
 			static NSInteger i = 0;
-			self.coverViewController.maximumCoverHeight = [@[@64, @100][i % 2] floatValue];
+			self.coverViewController.maximumCoverHeight = [@[@(self.view.frame.size.height * 0.6f), @(self.view.frame.size.height * 0.3f)][i % 2] floatValue];
 
 			i++;
 			break;
