@@ -12,6 +12,8 @@
 
 - (void)initializeCoverView;
 - (void)initializeContentView;
+- (CGRect)contentViewFrame;
+- (void)resetContentViewFrame;
 
 - (void)contentScrollViewDidScroll:(CGPoint)contentOffset;
 
@@ -140,9 +142,10 @@
 }
 
 - (void)setMinimumCoverHeight:(CGFloat)minimumCoverHeight {
-	// TODO: 書く
-	[self doesNotRecognizeSelector:_cmd];
-//	[self contentScrollViewDidScroll:self.curr];
+
+	_minimumCoverHeight = minimumCoverHeight;
+	[self resetContentViewFrame];
+	[self contentScrollViewDidScroll:self.rootViewController.scrollView.contentOffset];
 }
 
 - (void)setMaximumCoverHeight:(CGFloat)maximumCoverHeight {
@@ -166,15 +169,24 @@
 
 - (void)initializeContentView {
 	
-	CGRect frame = self.view.bounds;
-	frame.origin.y = self.minimumCoverHeight;
-	frame.size.height -= frame.origin.y;
-	
-	_contentView = [[UIView alloc] initWithFrame:frame];
+	_contentView = [[UIView alloc] initWithFrame:self.contentViewFrame];
 	_contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	_contentView.clipsToBounds = YES;
 
 	[self.view addSubview:_contentView];
+}
+
+- (CGRect)contentViewFrame {
+		
+	CGRect frame = self.view.bounds;
+	frame.origin.y = self.minimumCoverHeight;
+	frame.size.height -= frame.origin.y;
+	
+	return frame;
+}
+
+- (void)resetContentViewFrame {
+	self.contentView.frame = self.contentViewFrame;
 }
 
 #pragma mark -
