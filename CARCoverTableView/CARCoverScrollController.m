@@ -51,6 +51,9 @@
 	
 	[self.coverScrollView reloadData];
 	[self showChildScrollViewControllerAtIndex:self.coverScrollView.currentIndex];
+	
+//検証する
+//	self.coverScrollView.currentIndex = self.coverScrollView.currentIndex;
 }
 
 #pragma mark - Rotation
