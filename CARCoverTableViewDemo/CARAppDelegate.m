@@ -14,6 +14,7 @@
 #import "DEMOTableViewController.h"
 #import "DEMOCollectionViewController.h"
 #import "DEMOControlViewController.h"
+#import "DEMOTextViewController.h"
 
 @implementation CARAppDelegate
 
@@ -43,6 +44,10 @@
 	return [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ControlView"];
 }
 
+- (DEMOTextViewController *)textViewController {
+	return [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"DEMOTextView"];
+}
+
 - (UIViewController *)demoCoverViewController {
 	
 	DEMOTableViewController *demoTableViewController = [self demoTableViewController];
@@ -55,6 +60,7 @@
 - (UIViewController *)demoCoverScrollViewController {
 	
 	DEMOControlViewController *controlViewController = [self controlViewController];
+	DEMOTextViewController *textViewController = [self textViewController];
 	DEMOTableViewController *demoTableViewController = [self demoTableViewController];
 	DEMOCollectionViewController *demoCollectionViewController = [self demoCollectionViewController];
 	DEMOTableViewController *demoTableViewController2 = [self demoTableViewController];
@@ -64,6 +70,7 @@
 	
 	coverScrollViewController.viewControllers = @[
 												  controlViewController,
+												  textViewController,
 												  demoTableViewController,
 												  demoCollectionViewController,
 												  demoTableViewController2,
