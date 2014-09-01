@@ -101,7 +101,7 @@
 
 #pragma mark - Accessor
 - (void)setContentSize:(CGSize)contentSize {
-	
+		
 	contentSize.height = 1.0f;
 	
 	[super setContentSize:contentSize];
@@ -184,6 +184,13 @@
 	NSInteger floorX = floorf(x);
 	NSInteger floorBoundsWidth = floorf(boundsWidth);
 	NSInteger index = floorX / floorBoundsWidth;
+	
+	if (index >= self.itemCount) {
+		// landscpeで右端のcellを表示した状態でportraitに戻すとindexがitemCountを超える。
+		// setContentSizeやsetContentOffsetが呼ばれる以前にlayoutSubviewsが呼ばれるのでそれらでは解決できない。タイミング的にはViewControllerのwillRotateToInterfaceOrientation:duration:とwillAnimateRotationToInterfaceOrientation:duration:の間
+		// 回転時にここに引っかかっても、回転終了時にもう一度layoutSubviewsが呼ばれるようなので問題ないはず
+		return nil;
+	}
 	
 	// 1px以下のスクロール時に正確な値が返せないと思われる
 	// numberOfItemsを超えて1画面分スクロールするとout of boundsになると思われる（可能なのか？）

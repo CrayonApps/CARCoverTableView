@@ -67,13 +67,13 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-
-	self.coverScrollView.currentIndex = self.rotateIndex;
 	
 	CGSize contentSize = self.coverScrollView.contentSize;
 	contentSize.width = self.coverScrollView.bounds.size.width * self.viewControllers.count;
 	
 	self.coverScrollView.contentSize = contentSize;
+	
+	self.coverScrollView.currentIndex = self.rotateIndex;
 }
 
 #pragma mark - ContainerViewController Methods
