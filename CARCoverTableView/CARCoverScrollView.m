@@ -46,6 +46,8 @@
 - (void)updateCurrentIndex;
 - (void)calculateVelocity;
 
+- (void)resizeCells;
+
 /**
  ページを中央に揃える
  */
@@ -103,6 +105,11 @@
 	contentSize.height = 1.0f;
 	
 	[super setContentSize:contentSize];
+}
+
+- (void)setFrame:(CGRect)frame {
+	[super setFrame:frame];
+	[self resizeCells];
 }
 
 - (void)setDelegate:(id<CARCoverScrollViewDelegate>)delegate {
@@ -395,6 +402,23 @@
 	_previousVisibleIndices = visibleIndices.copy;
 	
 	self.reloadingData = NO;
+}
+
+#pragma mark Resizing
+- (void)resizeCells {
+	
+	for (NSNumber *key in self.allCells.allKeys) {
+	
+		NSInteger index = key.integerValue;
+		CGFloat width = self.frame.size.width;
+		CARCoverScrollViewCell *cell = self.allCells[key];
+		
+		CGRect frame = CGRectZero;
+		frame.origin.x = index * width;
+		frame.size = self.frame.size;
+		
+		cell.frame = frame;
+	}
 }
 
 #pragma mark - View Initialization

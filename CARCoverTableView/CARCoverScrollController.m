@@ -10,6 +10,8 @@
 
 @interface CARCoverScrollController ()
 
+@property (nonatomic, assign) NSInteger rotateIndex;
+
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index;
 - (void)fixContentOffset:(UIScrollView *)toScrollView from:(CGPoint)fromOffset;
 
@@ -57,8 +59,16 @@
 }
 
 #pragma mark - Rotation
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	self.rotateIndex = self.coverScrollView.currentIndex;
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+
+	self.coverScrollView.currentIndex = self.rotateIndex;
 	
 	CGSize contentSize = self.coverScrollView.contentSize;
 	contentSize.width = self.coverScrollView.bounds.size.width * self.viewControllers.count;
