@@ -17,6 +17,7 @@
 
 @optional
 - (void)coverScrollController:(CARCoverScrollController *)coverScrollController didShowViewController:(UIViewController <CARScrollViewController> *)viewController;
+- (void)coverScrollController:(CARCoverScrollController *)coverScrollController didChangeViewControllers:(NSArray *)viewControllers;
 
 @end
 

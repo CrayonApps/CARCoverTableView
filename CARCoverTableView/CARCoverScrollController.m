@@ -152,6 +152,10 @@
 	_viewControllers = viewControllers.copy;
 	
 	[self.coverScrollView reloadData];
+	
+	if ([self.delegate respondsToSelector:@selector(coverScrollController:didChangeViewControllers:)]) {
+		[self.delegate coverScrollController:self didChangeViewControllers:self.viewControllers];
+	}
 }
 
 #pragma mark - Subviews
