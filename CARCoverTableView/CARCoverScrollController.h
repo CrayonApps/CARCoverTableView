@@ -15,7 +15,7 @@
 
 @protocol CARCoverScrollControllerDelegate <NSObject>
 
-@required
+@optional
 - (void)coverScrollController:(CARCoverScrollController *)coverScrollController didShowViewController:(UIViewController <CARScrollViewController> *)viewController;
 
 @end
@@ -25,6 +25,8 @@
  ナビゲーション構造としてはUITabBarControllerと同じ
  
  CoverScrollViewCellを設定するためにCARCoverScrollControllerはサブクラス化して使用する必要がある
+ 
+ 注）ViewController階層に組み込まれる前に CARCoverViewController.coverScrollView.currentIndex を設定することは可能だが、その後 layoutIfNeeded 系のメソッドを使用すると currentIndex が0に戻ってしまうので注意
  */
 @interface CARCoverScrollController : CARCoverViewController <CARCoverScrollViewDataSource, CARCoverScrollViewDelegate>
 
