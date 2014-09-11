@@ -44,6 +44,8 @@
  */
 @property (nonatomic, strong) UIViewController <CARScrollViewController> *currentViewController;
 
+@property (nonatomic, assign, getter = isHorizontalScrollingEnabledOnContentView) BOOL horizontalScrollingEnabledOnContentView;
+
 //- (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView __attribute__ ((deprecated("use init and setViewControllers instead")));
 
 @end

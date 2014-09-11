@@ -10,6 +10,7 @@
 
 @interface CARCoverScrollController ()
 
+@property (nonatomic, strong) UIPanGestureRecognizer *horizontalPanGestureRecognizer;
 @property (nonatomic, assign) NSInteger rotateIndex;
 
 - (void)showChildScrollViewControllerAtIndex:(NSInteger)index;
@@ -22,6 +23,7 @@
 @synthesize coverScrollView = _coverScrollView;
 @synthesize viewControllers = _viewControllers;
 @synthesize currentViewController = _currentViewController;
+@synthesize horizontalScrollingEnabledOnContentView = _horizontalScrollingEnabledOnContentView;
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController scrollView:(UIScrollView *)scrollView {
 	/**
@@ -155,6 +157,27 @@
 	
 	if ([self.delegate respondsToSelector:@selector(coverScrollController:didChangeViewControllers:)]) {
 		[self.delegate coverScrollController:self didChangeViewControllers:self.viewControllers];
+	}
+}
+
+- (void)setHorizontalScrollingEnabledOnContentView:(BOOL)horizontalScrollingEnabledOnContentView {
+	
+	if (horizontalScrollingEnabledOnContentView == _horizontalScrollingEnabledOnContentView) {
+		return;
+	}
+	
+	_horizontalScrollingEnabledOnContentView = horizontalScrollingEnabledOnContentView;
+	
+	if (horizontalScrollingEnabledOnContentView) {
+		
+		self.horizontalPanGestureRecognizer = self.coverScrollView.panGestureRecognizer;
+		[self.coverScrollView removeGestureRecognizer:self.horizontalPanGestureRecognizer];
+		[self.view addGestureRecognizer:self.horizontalPanGestureRecognizer];
+	}
+	else {
+		
+		[self.view removeGestureRecognizer:self.horizontalPanGestureRecognizer];
+		[self.coverScrollView addGestureRecognizer:self.horizontalPanGestureRecognizer];
 	}
 }
 
