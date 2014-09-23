@@ -167,7 +167,7 @@
 	frame.size.height = self.minimumCoverHeight;
 	
 	_coverView = [[UIView alloc] initWithFrame:frame];
-	_coverView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_coverView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	_coverView.clipsToBounds = YES;
 
 	[self.view addSubview:_coverView];
@@ -176,7 +176,7 @@
 - (void)initializeContentView {
 	
 	_contentView = [[UIView alloc] initWithFrame:self.contentViewFrame];
-	_contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_contentView.clipsToBounds = YES;
 
 	[self.view addSubview:_contentView];
