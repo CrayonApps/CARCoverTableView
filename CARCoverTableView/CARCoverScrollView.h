@@ -64,4 +64,9 @@
 
 - (id)dequeReusableCellWithIdentifier:(NSString *)identifier;
 
+/**
+ visibleなセルのみ返る
+ */
+- (CARCoverScrollViewCell *)coverScrollViewCellAtIndex:(NSInteger)index;
+
 @end

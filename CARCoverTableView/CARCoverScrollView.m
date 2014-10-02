@@ -212,6 +212,17 @@
 	return indices;
 }
 
+- (CARCoverScrollViewCell *)coverScrollViewCellAtIndex:(NSInteger)index {
+	
+	NSIndexSet *visibleIndices = self.visibleIndices;
+	
+	if ([visibleIndices containsIndex:index] == NO) {
+		return nil;
+	}
+	
+	return self.allCells[@(index)];
+}
+
 #pragma mark - Reusable Views
 - (id)dequeReusableCellWithIdentifier:(NSString *)identifier {
 
